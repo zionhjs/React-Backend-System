@@ -31,7 +31,9 @@ class Login extends Component {
                                 </div>
                                 <div className="code-group input-group">
                                     <input placeholder="type verification"  className="code" type="text" />
-                                    <div className="img-code">img</div>
+                                    <div className="img-code">
+                                        <img src="/api/code" alt="" />
+                                    </div>
                                 </div>
                                 <div className="login-btn-group">
                                     Login
