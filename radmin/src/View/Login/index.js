@@ -29,9 +29,15 @@ class Login extends Component {
                                     <img src={ICON_LOCK} alt="UserName" />
                                     <input placeholder="type password" type="text" />
                                 </div>
-                                <div className="input-group">
-                                    <img src={ICON_USER} alt="UserName" />
-                                    <input type="text" />
+                                <div className="code-group input-group">
+                                    <input placeholder="type verification"  className="code" type="text" />
+                                    <div className="img-code">img</div>
+                                </div>
+                                <div className="login-btn-group">
+                                    Login
+                                </div>
+                                <div className="link-group">
+                                    Forgot Password?
                                 </div>
                             </div>
                             <div className="login-aside">
