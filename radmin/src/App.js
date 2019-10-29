@@ -1,13 +1,26 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+
+import Empty from './View/Empty';
+import Login from './View/Login';
+import Home from './View/Home';
+
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h3>Hello, Admin!</h3>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact render={(props) => {
+          return <Redirect to="/home"></Redirect>
+        }}></Route>
+        <Route path="/home" render={(props) => {
+          return <Home {...props}></Home>
+        }}></Route>
+        <Route path="/login" component="Login"></Route>
+        <Route component="Empty"></Route>
+      </Switch>
+    </Router>
   );
 }
 
