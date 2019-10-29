@@ -1,0 +1,21 @@
+.login {
+    .container{
+        width:1200px;
+        margin:0 auto;  
+    }
+    .top{
+        border-bottom:2px solid #f2f5f0;
+    }
+    .logo-wrap{
+        overflow:hidden;
+        background-color:#fff;
+        .logo{
+            display:block;
+            width:334px;
+            height:34px;
+            margin-top:11px;
+            background:url('/images/logo.gif') no-repeat;
+            background-size:100% 100%;
+        }
+    }
+}
