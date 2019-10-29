@@ -6,6 +6,10 @@ import ICON_LOCK from '../../assets/img/icon_lock.jpg';
 import './login.scss';
 
 class Login extends Component {
+    constructor(props){
+        super(props)
+        this.state = {}
+    }
     changeCode(e){
         e.target.src = '/api/code/?id=' + Date.now();
     }
@@ -27,7 +31,7 @@ class Login extends Component {
                             <div className="login-group">
                                 <div className="input-group">
                                     <img src={ICON_USER} alt="UserName" />
-                                    <input placeholder="type phone number" type="text" />
+                                    <input name="username" placeholder="type phone number" type="text" />
                                 </div>
                                 <div className="input-group grey-border">
                                     <img src={ICON_LOCK} alt="UserName" />
@@ -47,7 +51,8 @@ class Login extends Component {
                                 </div>
                             </div>
                             <div className="login-aside">
-                                right-side
+                                <p>Not Registered Yet</p>
+                                <p className="active">Register Now!</p>
                             </div>
                         </div>
                     </div>
