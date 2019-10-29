@@ -3,7 +3,7 @@ import React from 'react';
 export default function Empty() {
     return (
         <div>
-            404, unMatched!
+            404, Unmatched!
         </div>
     )
 }
