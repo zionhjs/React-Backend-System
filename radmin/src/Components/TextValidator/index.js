@@ -1,7 +1,6 @@
 //表单验证逻辑文件
 import React, { Fragment } from 'react';
 import { ValidatorComponent } from 'react-form-validator-core';
-import { ValidatorForm } from 'react-form-validator-core';
 
 class TextValidator extends ValidatorComponent {
     errorText(){

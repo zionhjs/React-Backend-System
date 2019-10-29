@@ -6,15 +6,19 @@ import ICON_LOCK from '../../assets/img/icon_lock.jpg';
 import TextValidator from '../../Components/TextValidator/index';
 import { ValidatorForm } from 'react-form-validator-core';
 
+import service from '../../Service';
+import { SaveLoginUserInfo } from '../../Common/Auth';
+import { message } from 'antd';
+
 import './login.scss';
 
 class Login extends Component {
     constructor(props){
         super(props)
         this.state = {
-            username:'',
-            password:'',
-            code:''
+            username:'18911112222',
+            password:'aicoder.com',
+            code:'222222'
         }
     }
     handlerChange = e => {
@@ -25,7 +29,18 @@ class Login extends Component {
         e.target.src = '/api/code/?id=' + Date.now();
     }
     handleSubmit = () => {
-        console.log('submit');
+        // console.log('submit');
+        service.userLogin(this.state)
+        .then(res => {
+            // console.log(res.data);
+            if(res.data.code === 1){
+                //用Auth.js保存用户登录信息
+                SaveLoginUserInfo(res.data.user);
+                //跳转到请求之前的页面
+            }else{
+                message.error('login failed, type-in right info!');
+            }
+        });
     }
     
     render() {
@@ -64,7 +79,7 @@ class Login extends Component {
                                     onChange={this.handlerChange} 
                                     value={this.state.password} 
                                     placeholder="type password" 
-                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z]{6,8}$']}
+                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z.]{6,20}$']}
                                     errorMessages={['*this field is require!', '*please type-in 6~8 strings!']}
                                     >
                                     </TextValidator>
@@ -78,7 +93,7 @@ class Login extends Component {
                                     type="text"
                                     placeholder="type verification" 
                                     className="code"
-                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z]{6}$']}
+                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z]{5}$']}
                                     errorMessages={['*this field is require!', '*please type-in 6 verificated strings!']}
                                     >
                                     </TextValidator>
