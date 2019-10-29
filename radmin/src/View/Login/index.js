@@ -6,6 +6,10 @@ import ICON_LOCK from '../../assets/img/icon_lock.jpg';
 import './login.scss';
 
 class Login extends Component {
+    changeCode(e){
+        e.target.src = '/api/code/?id=' + Date.now();
+    }
+    
     render() {
         return (
             <div className="login">
@@ -32,7 +36,7 @@ class Login extends Component {
                                 <div className="code-group input-group">
                                     <input placeholder="type verification"  className="code" type="text" />
                                     <div className="img-code">
-                                        <img src="/api/code" alt="" />
+                                        <img onClick={e => this.changeCode(e)} src="/api/code" alt="" />
                                     </div>
                                 </div>
                                 <div className="login-btn-group">
