@@ -1,21 +1,64 @@
 .login {
+    background-color:#fff;
     .container{
         width:1200px;
         margin:0 auto;  
     }
+    //顶部区域排版
     .top{
         border-bottom:2px solid #f2f5f0;
-    }
-    .logo-wrap{
-        overflow:hidden;
-        background-color:#fff;
-        .logo{
-            display:block;
-            width:334px;
-            height:34px;
-            margin-top:11px;
-            background:url('/images/logo.gif') no-repeat;
-            background-size:100% 100%;
+        .logo-wrap{
+            overflow:hidden;
+            background-color:#fff;
+            .logo{
+                display:block;
+                width:334px;
+                height:34px;
+                margin-top:11px;
+                background:url('/images/logo.gif') no-repeat;
+                background-size:100% 100%;
+            }
         }
+    }
+
+    $bg-color:#eff2f7;
+    
+    //中间登录区域排版
+    .main-bd{
+        padding-bottom:134px;
+        background-color:#fff;
+        .login-box-wrap{
+            background-color:$bg-color;
+            box-sizing:border-box;
+            height:528px;
+            padding:89px 0 32px;
+            &::after{
+                content:'';
+                display:block;
+                height:0px;
+                border:67px solid $bg-color;
+                border-width:67px 50vw 0;
+                border-color:$bg-color transparent;
+                // background-color:red;
+                position:relative;
+                top:32px;
+            }
+            .login-box{
+                background-color:#fff;
+                margin:0 auto;
+                height:405px;
+            }
+        }
+    }
+
+    //底部版权区域排版
+    .main-ft{
+        height:32px;
+        line-height:32px;
+        font-size:12px;
+        color:#ccc;
+        background-color:#fff;
+        text-align: center;
+        border-top:1px solid #ccc;
     }
 }
