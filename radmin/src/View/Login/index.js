@@ -11,7 +11,6 @@ class Login extends Component {
                     <div className="container">
                         <div className="logo-wrap">
                             <Link className="logo" to="/">
-                                
                             </Link>
                         </div>
                     </div>
@@ -19,7 +18,20 @@ class Login extends Component {
                 <div className="main-bd">
                     <div className="login-box-wrap">
                         <div className="login-box container">
-                            Login-Box
+                            <div className="login-group">
+                                <div className="input-group">
+                                    <input type="text" />
+                                </div>
+                                <div className="input-group">
+                                    <input type="text" />
+                                </div>
+                                <div className="input-group">
+                                    <input type="text" />
+                                </div>
+                            </div>
+                            <div className="login-aside">
+                                right-side
+                            </div>
                         </div>
                     </div>
                 </div>

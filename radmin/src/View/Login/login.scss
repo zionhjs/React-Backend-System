@@ -47,6 +47,29 @@
                 background-color:#fff;
                 margin:0 auto;
                 height:405px;
+                border:1px solid #f7f8fa;
+                border-radius: 5px;
+                box-sizing:border-box;
+                padding:49px 15px;
+                display:flex;
+                text-align:center;
+                .login-group{
+                   flex: 0 0 695px;
+                   border-right:1px solid #ccc;
+                   .input-group{
+                       margin:10px 0;
+                       display:block;
+                       height:38px;
+                       box-sizing:border-box;
+                       border:2px solid #FAFBFD;
+                       width:306px;
+                       margin:10px auto;
+                       border-radius:4px;
+                   }
+                }
+                .login-aside{
+                    flex:1;
+                }
             }
         }
     }
