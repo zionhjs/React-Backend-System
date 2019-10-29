@@ -15,7 +15,7 @@ export function AuthLogin() {
 }
 
 /**
- * 存储当前用户登录的信息到本地存储
+ * 存储当前用户登录的信息到sessionStorage
  * @param {Objec} user 
  * @return undefined
  */

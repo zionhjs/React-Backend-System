@@ -28,8 +28,10 @@ class Login extends Component {
     changeCode(e){
         e.target.src = '/api/code/?id=' + Date.now();
     }
+
     handleSubmit = () => {
         // console.log('submit');
+        let { history } = this.props;
         service.userLogin(this.state)
         .then(res => {
             // console.log(res.data);
@@ -37,6 +39,7 @@ class Login extends Component {
                 //用Auth.js保存用户登录信息
                 SaveLoginUserInfo(res.data.user);
                 //跳转到请求之前的页面
+                history.push('/home');
             }else{
                 message.error('login failed, type-in right info!');
             }
