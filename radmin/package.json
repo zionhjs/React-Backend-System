@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "node-sass": "^4.13.0",
+    "react-form-validator-core": "^0.6.4",
     "react-router-dom": "^5.1.2"
   },
-  "proxy":"http://localhost:8888"
+  "proxy": "http://localhost:8888"
 }
