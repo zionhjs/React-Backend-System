@@ -8,7 +8,15 @@ import './login.scss';
 class Login extends Component {
     constructor(props){
         super(props)
-        this.state = {}
+        this.state = {
+            username:'',
+            password:'',
+            code:''
+        }
+    }
+    handlerChange = e => {
+        let newState = {[e.target.name]: e.target.value};
+        this.setState(state => ({...this.state, ...newState}));
     }
     changeCode(e){
         e.target.src = '/api/code/?id=' + Date.now();
@@ -31,14 +39,14 @@ class Login extends Component {
                             <div className="login-group">
                                 <div className="input-group">
                                     <img src={ICON_USER} alt="UserName" />
-                                    <input name="username" placeholder="type phone number" type="text" />
+                                    <input name="username" onChange={this.handlerChange} value={this.state.username} placeholder="type phone number" type="text" />
                                 </div>
                                 <div className="input-group grey-border">
                                     <img src={ICON_LOCK} alt="UserName" />
-                                    <input placeholder="type password" type="text" />
+                                    <input name="password" onChange={this.handlerChange} value={this.state.password} placeholder="type password" type="password" />
                                 </div>
                                 <div className="code-group input-group">
-                                    <input placeholder="type verification"  className="code" type="text" />
+                                    <input name="code" onChange={this.handlerChange} value={this.state.code} placeholder="type verification"  className="code" type="text" />
                                     <div className="img-code">
                                         <img onClick={e => this.changeCode(e)} src="/api/code" alt="" />
                                     </div>
