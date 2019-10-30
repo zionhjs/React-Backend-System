@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import Top from '../../Components/Top';
+import MenuBar from '../../Components/MenuBar';
 
 const {Header, Footer, Sider, Content} = Layout;
+
 class Home extends Component {
     render() {
         return (
@@ -11,7 +13,9 @@ class Home extends Component {
                     <Top history={this.props.history}></Top>
                 </Header>
                 <Layout>
-                    <Sider style={{backgroundColor:'silver'}}>Left</Sider>
+                    <Sider style={{backgroundColor:'#fff'}}>
+                        <MenuBar history={this.props.history}></MenuBar>
+                    </Sider>
                     <Content>Content</Content>
                 </Layout>
                 <Footer style={{backgroundColor:'silver'}}>Footer</Footer>

@@ -19,7 +19,7 @@ class Login extends Component {
         this.state = {
             username:'18911112222',
             password:'aicoder.com',
-            code:'222222'
+            code:'22222'
         }
     }
     handlerChange = e => {
@@ -106,7 +106,7 @@ class Login extends Component {
                                     placeholder="type verification" 
                                     className="code"
                                     validators={['required', 'matchRegexp:^[0-9a-zA-Z]{5}$']}
-                                    errorMessages={['*this field is require!', '*please type-in 6 verificated strings!']}
+                                    errorMessages={['*this field is require!', '*please type-in 5 verificated strings!']}
                                     >
                                     </TextValidator>
                                     <div className="img-code">
