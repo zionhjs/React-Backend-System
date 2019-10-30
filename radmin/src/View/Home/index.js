@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <Layout style={{minHeight:'100vh'}}>
                 <Header style={{color:'#fff', padding:'0 15px'}}>
-                    <Top></Top>
+                    <Top history={this.props.history}></Top>
                 </Header>
                 <Layout>
                     <Sider style={{backgroundColor:'silver'}}>Left</Sider>
