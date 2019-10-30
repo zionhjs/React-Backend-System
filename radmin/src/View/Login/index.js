@@ -7,7 +7,7 @@ import TextValidator from '../../Components/TextValidator/index';
 import { ValidatorForm } from 'react-form-validator-core';
 
 import service from '../../Service';
-import { SaveLoginUserInfo } from '../../Common/Auth';
+import { SaveLoginUserInfo, saveLoginToken} from '../../Common/Auth';
 import { message } from 'antd';
 import { urlParams2Object } from '../../Common/Helper';
 
@@ -39,12 +39,14 @@ class Login extends Component {
             if(res.data.code === 1){
                 //用Auth.js保存用户登录信息
                 SaveLoginUserInfo(res.data.user);
+                //保存用户的登录后 后台返回的token(后台返回的每个用户身份信息)
+                saveLoginToken(res.data.token);
                 //跳转到请求之前的页面
-                let url = './home';   //判断当前请求的地址中是否有preurl
+                let url = '/home';   //判断当前请求的地址中是否有preurl
                 // location.search 
                 if(location.search){
                     let params = urlParams2Object(location.search);
-                    if(params && params.preurl){
+                    if(params.preurl){
                         url = params.preurl;
                     }
                 }

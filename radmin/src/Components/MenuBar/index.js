@@ -1,16 +1,17 @@
 import React, { Component, Fragment } from 'react';
 
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 const { SubMenu } = Menu;
 
 class MenuBar extends Component {
     state = {
-        current:'user_mgr'
+        current:''
     }
     handleMenuClick = e => {
         console.log(e);
         //控制路由跳转
         this.setState({current:e.key});
+        this.props.history.push(`/home/${e.key}`);
     }
     render() {
         return (
@@ -20,14 +21,26 @@ class MenuBar extends Component {
                 selectedKeys={[this.state.current]}
                 mode="inline"
                 >
-                    <SubMenu title="backend management">
-                        <Menu.Item key="user_mgr">UserManagement</Menu.Item>
-                        <Menu.Item key="role_mgr">RoleManagement</Menu.Item>
-                        <Menu.Item key="per_mgr">PermissionManagement</Menu.Item>
+                    <SubMenu 
+                    title={
+                    <span>
+                        <Icon type="pie-chart" />
+                        BackendManagement
+                    </span>}
+                    >
+                        <Menu.Item key="user_mgr"><Icon type="codepen-circle" />UserManagement</Menu.Item>
+                        <Menu.Item key="role_mgr"><Icon type="google" />RoleManagement</Menu.Item>
+                        <Menu.Item key="per_mgr"><Icon type="dribbble" />PermissionManagement</Menu.Item>
                     </SubMenu>
-                    <SubMenu title="store management">
-                        <Menu.Item key="goods_mgr">GoodsManagement</Menu.Item>
-                        <Menu.Item key="order_mgr">OrderManagement</Menu.Item>
+                    <SubMenu 
+                    title={
+                    <span>
+                        <Icon type="ant-design" />
+                        StoreManagement
+                    </span>}
+                    >
+                        <Menu.Item key="goods_mgr"><Icon type="bug" />GoodsManagement</Menu.Item>
+                        <Menu.Item key="order_mgr"><Icon type="cloud" />OrderManagement</Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>

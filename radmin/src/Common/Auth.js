@@ -42,3 +42,19 @@ export function GetLoginUserInfo(user){
 export function Logout(){
     sessionStorage.clear();   //清空所有的用户登录的相关信息
 }
+
+/**
+ * 保存用户登录后台的token信息
+ * @param {String} token   请求身份
+ */
+export function saveLoginToken(token){
+    sessionStorage.setItem('Authorization', token);
+}
+
+/**
+ * 获取用户登录后台的token信息
+ * @return {String} token   请求身份
+ */
+export function getLoginToken(token){
+    return sessionStorage.getItem('Authorization', token);
+}
