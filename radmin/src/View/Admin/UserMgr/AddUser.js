@@ -11,7 +11,7 @@ class AddUser extends Component {
             // console.log(err);
             // console.log(data);
             if(err==null){
-                
+                //ajax
             }
         })
     }
