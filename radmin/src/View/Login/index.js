@@ -9,6 +9,7 @@ import { ValidatorForm } from 'react-form-validator-core';
 import service from '../../Service';
 import { SaveLoginUserInfo } from '../../Common/Auth';
 import { message } from 'antd';
+import { urlParams2Object } from '../../Common/Helper';
 
 import './login.scss';
 
@@ -31,7 +32,7 @@ class Login extends Component {
 
     handleSubmit = () => {
         // console.log('submit');
-        let { history } = this.props;
+        let { history, location } = this.props;
         service.userLogin(this.state)
         .then(res => {
             // console.log(res.data);
@@ -39,7 +40,15 @@ class Login extends Component {
                 //用Auth.js保存用户登录信息
                 SaveLoginUserInfo(res.data.user);
                 //跳转到请求之前的页面
-                history.push('/home');
+                let url = './home';   //判断当前请求的地址中是否有preurl
+                // location.search 
+                if(location.search){
+                    let params = urlParams2Object(location.search);
+                    if(params && params.preurl){
+                        url = params.preurl;
+                    }
+                }
+                history.push(url);
             }else{
                 message.error('login failed, type-in right info!');
             }
@@ -83,7 +92,7 @@ class Login extends Component {
                                     value={this.state.password} 
                                     placeholder="type password" 
                                     validators={['required', 'matchRegexp:^[0-9a-zA-Z.]{6,20}$']}
-                                    errorMessages={['*this field is require!', '*please type-in 6~8 strings!']}
+                                    errorMessages={['*this field is require!', '*please type-in 6~20 strings!']}
                                     >
                                     </TextValidator>
                                 </div>
