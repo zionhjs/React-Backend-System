@@ -26,7 +26,7 @@ class Home extends Component {
                 <Header style={{color:'#fff', padding:'0 15px'}}>
                     <Top history={this.props.history}></Top>
                 </Header>
-                <Layout>
+                <Layout style={{overflow: 'scroll'}}>
                     <Sider style={{backgroundColor:'#fff'}}>
                         <MenuBar history={this.props.history}></MenuBar>
                     </Sider>
@@ -39,7 +39,7 @@ class Home extends Component {
                         </Switch>
                     </Content>
                 </Layout>
-                <Footer style={{backgroundColor:'silver', height:"38px"}}>Footer</Footer>
+                <Footer style={{backgroundColor: 'silver', height: '24px', padding: '0', lineHeight: '24px'}}>Footer</Footer>
             </Layout>
         );
     }

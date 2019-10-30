@@ -8,7 +8,9 @@ import store from '../../../store';
 class UserMgr extends Component {
     state={
         unsubscribe:null,
-        userlist: store.getState().UserList,
+        userlist: store.getState().UserList.list,
+        params:{_page:1, _limit:6},
+        total:0,
         columns:[{
             key:'id',
             title:'id',
@@ -25,7 +27,8 @@ class UserMgr extends Component {
     }
 
     userListChange = () => {
-        this.setState({userlist: store.getState().UserList});
+        const UserList = store.getState().UserList;
+        this.setState({userlist:UserList.list, total:UserList.total});
     }
     componentDidMount(){
         //发送ajax请求到后台 获取当前用户列表数据
@@ -34,7 +37,7 @@ class UserMgr extends Component {
         //     this.setState({userlist: res.data});
         // })
         
-        store.dispatch(LoadUserActionAsync({}));
+        store.dispatch(LoadUserActionAsync(this.state.params));
         const unsubscribe = store.subscribe(this.userListChange);
         this.setState({unsubscribe:unsubscribe});
     }
@@ -47,6 +50,14 @@ class UserMgr extends Component {
         onChange:(selectedRowKeys, selectedRows) => {
             console.log(selectedRowKeys, selectedRows)
         }
+    }
+
+    changePage = (page, pageSize) => {
+        // console.log('page:', page, ',pageSize:', pageSize)
+        this.setState(preState => { 
+            return {...preState, ...{params:{_page:page, _limit:pageSize}}}, () => {
+                store.dispatch(LoadUserActionAsync(this.state.params));
+        }});
     }
     
     render() {
@@ -68,6 +79,7 @@ class UserMgr extends Component {
                     columns={this.state.columns}
                     rowSelection={this.userRowSelection}
                     rowKey="id"   //react要求必须对其指定唯一的key 不然会报错
+                    pagination={{total:this.state.total, pageSize:6, defaultCurrent:1, onChange:this.changePage}}
                 ></Table>
             </div>
         );
