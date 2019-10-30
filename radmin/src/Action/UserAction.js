@@ -7,7 +7,6 @@ export function LoadUserAction(payload){
         payload 
     }
 }
-
 //redux-thunk的用法:
 export function LoadUserActionAsync(params){
     return dispatch => {
@@ -15,5 +14,20 @@ export function LoadUserActionAsync(params){
         .then(res => {
             dispatch(LoadUserAction({list:res.data, total:parseInt(res.headers['x-total-count'])}));
         })
+    }
+}
+
+export function AddUserAction(payload){
+    return{
+        type:ActionTypes.ADD_USER,
+        payload
+    }
+}
+export function AddUserActionAsync(payload){
+    return dispatch => {
+        return service.addUser(payload)
+               .then(res =>{
+                   dispatch(AddUserAction(res.data));
+               })
     }
 }
