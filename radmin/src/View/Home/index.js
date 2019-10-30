@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Layout } from 'antd';
 
+const {Header, Footer, Sider, Content} = Layout;
 class Home extends Component {
     render() {
         return (
-            <div>
-                Home
-            </div>
+            <Layout style={{minHeight:'100vh'}}>
+                <Header style={{color:'#fff'}}>Header</Header>
+                <Layout>
+                    <Sider style={{backgroundColor:'silver'}}>Left</Sider>
+                    <Content>Content</Content>
+                </Layout>
+                <Footer style={{backgroundColor:'silver'}}>Footer</Footer>
+            </Layout>
         );
     }
 }
-
-Home.propTypes = {
-
-};
 
 export default Home;
