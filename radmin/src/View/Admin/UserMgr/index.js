@@ -2,23 +2,13 @@ import React, { Component } from 'react';
 import { Breadcrumb, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
+import { LoadUserActionAsync } from '../../../Action/UserAction';
+import store from '../../../store';
 
 class UserMgr extends Component {
     state={
-        userlist:[{
-            id:1,
-            name:'google',
-            phone:'18922222'
-        },{
-            id:2,
-            name:'google2',
-            phone:'18922222333333'
-        },{
-            id:3,
-            name:'google3',
-            phone:'1892222233333344444'
-        }],
-
+        unsubscribe:null,
+        userlist: store.getState().UserList,
         columns:[{
             key:'id',
             title:'id',
@@ -34,12 +24,23 @@ class UserMgr extends Component {
         }]
     }
 
+    userListChange = () => {
+        this.setState({userlist: store.getState().UserList});
+    }
     componentDidMount(){
         //发送ajax请求到后台 获取当前用户列表数据
-        service.loadUserList()
-        .then(res => {
-            this.setState({userlist: res.data});
-        })
+        // service.loadUserList()
+        // .then(res => {
+        //     this.setState({userlist: res.data});
+        // })
+        
+        store.dispatch(LoadUserActionAsync({}));
+        const unsubscribe = store.subscribe(this.userListChange);
+        this.setState({unsubscribe:unsubscribe});
+    }
+    
+    componentWillUnmount(){
+        this.state.unsubscribe && (this.state.unsubscribe());
     }
     
     userRowSelection={
