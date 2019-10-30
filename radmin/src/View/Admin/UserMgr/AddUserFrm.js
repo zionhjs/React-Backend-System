@@ -26,6 +26,23 @@ class AddUserFrm extends Component {
                     />
                     )}
                 </Form.Item>
+                <Form.Item lable="PassWord">
+                    {getFieldDecorator('password', {
+                        rules:[
+                            {
+                             pattern:/\w{6,20}/gi,
+                             message:'please type-in 6~20 strings!',
+                            },{
+                                required:true,
+                                message:'Please type-in your PassWord!',
+                            }
+                        ],
+                    })(
+                    <Input.Password prefix={<Icon type="safety"></Icon>} 
+                           placeholder="PassWord"
+                    />
+                    )}
+                </Form.Item>
                 <Form.Item lable="Mail">
                     {getFieldDecorator('mail', {
                         rules:[
@@ -55,7 +72,7 @@ class AddUserFrm extends Component {
                             }
                         ],
                     })(
-                    <Input prefix={<Icon type="name"></Icon>} 
+                    <Input prefix={<Icon type="user"></Icon>} 
                            placeholder="Name"
                     />
                     )}
