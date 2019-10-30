@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Table } from 'antd';
+import { Breadcrumb, Table, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import { LoadUserActionAsync } from '../../../Action/UserAction';
+import AddUser from './AddUser';
 import store from '../../../store';
+
 
 class UserMgr extends Component {
     state={
+        showAddUserDialog:false,
         unsubscribe:null,
         userlist: store.getState().UserList.list,
         params:{_page:1, _limit:6},
@@ -55,10 +58,18 @@ class UserMgr extends Component {
     changePage = (page, pageSize) => {
         // console.log('page:', page, ',pageSize:', pageSize)
         this.setState(preState => { 
-            return {...preState, ...{params:{_page:page, _limit:pageSize}}}, () => {
+            return {...preState, ...{params:{_page:page, _limit:pageSize}}}
+        }, () => {
                 store.dispatch(LoadUserActionAsync(this.state.params));
-        }});
+        });
     }
+
+    //#region 按钮的方法和样式
+    hideAddUserDialog = () => {
+        this.setState({showAddUserDialog:false});
+    }
+    buttonStyle={margin:'5px'};
+    //#endregion
     
     render() {
         return (
@@ -72,6 +83,9 @@ class UserMgr extends Component {
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <hr />
+                <Button onClick={() => this.setState({showAddUserDialog:true})} style={this.buttonStyle} type="primary">Add</Button>
+                <Button style={this.buttonStyle} type="danger">Delete</Button>
+                <Button style={this.buttonStyle} type="primary">Modify</Button>
                 <Table
                     bordered
                     style={{backgroundColor:'#fefefe'}}
@@ -81,6 +95,7 @@ class UserMgr extends Component {
                     rowKey="id"   //react要求必须对其指定唯一的key 不然会报错
                     pagination={{total:this.state.total, pageSize:6, defaultCurrent:1, onChange:this.changePage}}
                 ></Table>
+                <AddUser close={this.hideAddUserDialog} visible={this.state.showAddUserDialog}></AddUser>
             </div>
         );
     }
