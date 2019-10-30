@@ -77,6 +77,20 @@ class AddUserFrm extends Component {
                     />
                     )}
                 </Form.Item>
+                <Form.Item lable="Phone">
+                    {getFieldDecorator('phone', {
+                        rules:[
+                            {
+                             pattern:/\d{11}/gi,
+                             message:'please type-in right format of phone!'
+                            }
+                        ],
+                    })(
+                    <Input prefix={<Icon type="phone"></Icon>} 
+                           placeholder="Phone"
+                    />
+                    )}
+                </Form.Item>
             </Form>
         );
     }
