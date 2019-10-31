@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Breadcrumb, Input, Button, message, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoadPerAsync } from '../../../Action/PerAction';
+import AddPer from './Addper';
 
 function mapStateToProps(state) {
     return {
@@ -21,6 +22,7 @@ function mapDispatchToProps(dispatch) {
 
 class PerMgr extends Component {
     state = {
+        showAddPerDialog:false,
         params:{
             _limit:6,
             _page:1,
@@ -80,7 +82,9 @@ class PerMgr extends Component {
         }]
     }
 
-    handleAdd = () => { }
+    handleAdd = () => { 
+        this.setState({showAddPerDialog: ture});
+    }
     handleDelete = () => { }
     handleBarEdit = () => { }
     handleSearch = (value) => { 
@@ -97,6 +101,10 @@ class PerMgr extends Component {
         this.props.loadDataAsync(this.state.params);
     }
     buttonStyle = { margin: '5px' }
+    
+    closeAddPerDialog = () => {
+        this.setState({showAddPerDialog: false});
+    }
 
     //生命周期的钩子
     compinentDidMount(){
@@ -139,6 +147,11 @@ class PerMgr extends Component {
                     }}
                     pagination={{ total: this.props.total, pageSize: 6, defaultCurrent: 1, onChange: this.changePage }}
                 ></Table>
+                <AddPer 
+                   visible={this.state.showAddPerDialog}
+                   close={this.closeAddPerDialog}
+                >
+                </AddPer>
             </div>
         );
     }
