@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Table, Button, Modal, message } from 'antd';
+import { Breadcrumb, Table, Button, Modal, message, Avatar, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import { LoadUserActionAsync } from '../../../Action/UserAction';
 import AddUser from './AddUser';
 import store from '../../../store';
-
 
 class UserMgr extends Component {
     state = {
@@ -27,7 +26,50 @@ class UserMgr extends Component {
             key: 'phone',
             title: 'phone',
             dataIndex: 'phone'
+        }, {
+            key: 'avatar',
+            title: 'avatar',
+            dataIndex: 'avatar',
+            render: (avatar) => <Avatar src={avatar}></Avatar>
+        }, {
+            key: 'del',
+            title: 'edit',
+            dataIndex: 'del',
+            render: (del, row) => {
+                return (
+                    <div>
+                        <Button style={{ marginRight: '5px' }} type="primary">Edit</Button>
+                        <Popconfirm
+                            onConfirm={() => {
+                                //message.info(row.id);
+                                this.deleteUser(row.id);
+                            }}
+                            title="Sure Delete?"
+                            okText="Confirm"
+                            cancelText="cancel"
+                        >
+                            <Button type="danger">
+                                Delete
+                            </Button>
+                        </Popconfirm>
+                    </div>
+                )
+            }
         }]
+    }
+
+    deleteUser = (id) => {
+        service.deleteUser([id])
+            .then(res => {
+                store.dispatch(LoadUserActionAsync(this.state.params));
+                message.info('delete success!');
+                let newSelectRowKeys = this.state.selectRowKeys.filter(item => item !== id)
+                this.setState({ selectRowKeys: newSelectRowKeys});
+            })
+            .catch(e => {
+                console.log(e);
+                message.error('delete failed!');
+            });
     }
 
     userListChange = () => {
@@ -80,7 +122,7 @@ class UserMgr extends Component {
                     .then(res => {
                         store.dispatch(LoadUserActionAsync(this.state.params));
                         message.info('delete success!');
-                        this.setState({ selectRowKeys: []});
+                        this.setState({ selectRowKeys: [] });
                     })
                     .catch(e => {
                         console.log(e);
