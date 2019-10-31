@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import { Breadcrumb, Table, Button, Modal, message, Avatar, Popconfirm, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
+import AddRole from './AddRole';
+import AddUser from '../UserMgr/AddUser';
 
 class RoleMgr extends Component {
-    state ={
-        params:{
-            _page:1,
-            _limit:6,
-            q:'',
-            _sort:'id',
-            _order:'desc'
+    state = {
+        showAddRoleDialog:false,
+        selectedRowKeys: [],
+        params: {
+            _page: 1,
+            _limit: 6,
+            q: '',
+            _sort: 'id',
+            _order: 'desc'
         },
-        total:0,
+        total: 0,
         roleList: [{
             "id": 5,
             "pId": 0,
@@ -21,66 +25,125 @@ class RoleMgr extends Component {
             "subon": "2019-05-08 16:54:26",
             "status": 0,
             "del": 0
-          }],
-        columns:[{
-            key:'Id',
-            dataIndex:'id',
-            title:'Numbering'
-        },{
-            key:'Name',
-            dataIndex:'name',
-            title:'RoleName'
-        },{
-            key:'status',
-            dataIndex:'status',
-            title:'Status',
-            render:(status, row) => <span>{status === 0 ? 'Enable' : 'Disable'}</span>
-        },{
-            key:'subbon',
-            dataIndex:'subbon',
-            title:'SubmitTime'
-        },{
-            key:'pid',
-            dataIndex:'pid',
-            title:'ParentRole'
-        },{
-            key:'del',
-            dataIndex:'del',
-            title:'modify',
-            render:(del, row) => {
-                return(
+        }],
+        columns: [{
+            key: 'Id',
+            dataIndex: 'id',
+            title: 'Numbering'
+        }, {
+            key: 'Name',
+            dataIndex: 'name',
+            title: 'RoleName'
+        }, {
+            key: 'status',
+            dataIndex: 'status',
+            title: 'Status',
+            render: (status, row) => <span>{status === 0 ? 'Enable' : 'Disable'}</span>
+        }, {
+            key: 'subbon',
+            dataIndex: 'subbon',
+            title: 'SubmitTime'
+        }, {
+            key: 'pid',
+            dataIndex: 'pid',
+            title: 'ParentRole'
+        }, {
+            key: 'del',
+            dataIndex: 'del',
+            title: 'modify',
+            render: (del, row) => {
+                return (
                     <div>
-                        <Button type="primary">Edit</Button>
-                        <Button type="danger">Delete</Button>
+                        <Button type="primary" style={{marginRight:'5px'}}>Edit</Button>
+                        <Popconfirm 
+                           title="sure delete?"
+                           okText="confirm"
+                           cancelText="cancel"
+                           onConfirm={() => {
+                               service.deleteRoles([row.id])
+                               .then(res => {
+                                   message.info('delete success!');
+                                   this.loadData();
+                               })
+                               .catch(err => {
+                                   console.log(err);
+                                   message.error('delete failed!');
+                               });
+                           }}
+                        >
+                            <Button type="danger">Delete</Button>
+                        </Popconfirm>
                     </div>
                 )
             }
         }]
     }
-    
-    handleEdit = () => {
-        
-    }
+
     handleDelete = () => {
-        
+        Modal.confirm({
+            title: 'sure to delete?',
+            okText: 'delete',
+            cancelText: 'cancel',
+            onOk: () => {
+                //拿到要删除的数据的id
+                // this.state.selectedRowKeys
+                service.deleteRoles(this.state.selectedRowKeys)
+                    .then(res => {
+                        message.info('delete success!');
+                        this.loadData();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        message.error('delete failed!');
+                    });
+            }
+        })
     }
     handleEdit = () => {
-        
+
+    }
+    handleAdd = () => {
+        this.setState({
+            showAddRoleDialog:true
+        })
+    }
+    handleSearch = (value) => {
+        this.setState(preState => {
+            preState.params.q = value;
+            return { ...preState };
+        }, () => {
+            this.loadData();
+        });
+    }
+    loadData = () => {
+        service.loadRoleList(this.state.params)
+            .then(res => {
+                this.setState({ roleList: res.data, total: parseInt(res.headers['x-total-count']) });
+            });
     }
 
-    loadData = () => {
-        service.loadRoleList()
-        .then(res => {
-            this.setState({roleList: res.data, total:parseInt(res.headers['x-total-count'])});
+    changePage = (page, pageSize) => {
+        this.setState(preState => {
+            preState.params._page = page;
+            preState.params.limit = pageSize;
+            return { ...preState };
+        }, () => {
+            this.loadData();
         });
     }
 
-    componentDidMount(){
+    closeAddDialog = () => {
+        this.setState({showAddRoleDialog: false});
+    }
+    
+    componentDidMount() {
         this.loadData();
     }
 
-    buttonStyle = { margin: '5px'}
+    buttonStyle = { margin: '5px' }
+
     render() {
+        let { selectedRowKeys } = this.state;
         return (
             <div>
                 <Breadcrumb>
@@ -97,6 +160,7 @@ class RoleMgr extends Component {
                 <Button onClick={this.handleEdit} style={this.buttonStyle} type="primary">Edit</Button>
                 <Input.Search
                     placeholder="search"
+                    onSearch={this.handleSearch}
                     enterButton
                     style={{ margin: '5px', width: '300px' }}
                 />
@@ -106,8 +170,16 @@ class RoleMgr extends Component {
                     dataSource={this.state.roleList}
                     columns={this.state.columns}
                     rowKey="id"   //react要求必须对其指定唯一的key 不然会报错
+                    rowSelection={{
+                        selectedRowKeys: selectedRowKeys,
+                        onChange: (selectedRowKeys, selectedRows) => {
+                            this.setState({ selectedRowKeys: selectedRowKeys });
+                            console.log(selectedRowKeys);
+                        }
+                    }}
                     pagination={{ total: this.state.total, pageSize: 6, defaultCurrent: 1, onChange: this.changePage }}
                 ></Table>
+                <AddRole close={this.closeAddDialog} visible={this.state.showAddRoleDialog}></AddRole>
             </div>
         );
     }

@@ -21,5 +21,8 @@ export default {
     },
     loadRoleList(params){
         return axios.get('/per/role', {...params});
+    },
+    deleteRoles(ids){
+        return Promise.all(ids.map(id => axios.delete(`/per/role/${id}`)));
     }
 }
