@@ -12,7 +12,8 @@ export function LoadPerAsync(params){
     return dispatch => {
         return service.loadPerListt(params)
                .then(res => {
-                   dispatch({list:res.data, total:parseInt(res.headers['x-total-count'])});
+                   let payload = {list:res.data, total:parseInt(res.headers['x-total-count'])};
+                   dispatch(LoadPer(payload));
                })      
     }
 }
