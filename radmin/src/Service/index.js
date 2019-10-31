@@ -18,5 +18,8 @@ export default {
     },
     updateUser(user){
         return axios.put(`/per/user/${user.id}`, user);
+    },
+    loadRoleList(params){
+        return axios.get('/per/role', {...params});
     }
 }
