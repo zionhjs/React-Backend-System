@@ -17,8 +17,7 @@ class AddRole extends Component {
                okText="Add"
                cancelText="cancel"
             >
-                AddRoles
-                <AddRoleFrm></AddRoleFrm>
+                <AddRoleFrmComponent ref={frm => this.frmAddRole = frm}></AddRoleFrmComponent>
             </Modal>
         );
     }

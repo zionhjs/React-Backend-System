@@ -4,6 +4,7 @@ import { getLoginToken } from '../../../Common/Auth';
 
 class AddUserFrm extends Component {
     handleChangeAvatar = (e) => {
+        this.props.changeFileList(e.fileList);
         if(e.file.response){
             console.log(e.file.response);
             return e.file.response.img;
