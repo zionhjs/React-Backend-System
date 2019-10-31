@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Table, Button, Modal, message, Avatar, Popconfirm } from 'antd';
+import { Breadcrumb, Table, Button, Modal, message, Avatar, Popconfirm, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import { LoadUserActionAsync } from '../../../Action/UserAction';
@@ -101,10 +101,13 @@ class UserMgr extends Component {
         this.state.unsubscribe && (this.state.unsubscribe());
     }
 
-    changePage = (page, pageSize) => {
+    changePage = (page, pageSize, q="") => {   //q参数是react脚手架自带的搜索参数
         // console.log('page:', page, ',pageSize:', pageSize)
+        if(!!q){
+            q = this.state.params.q;
+        }
         this.setState(preState => {
-            return { ...preState, ...{ params: { _page: page, _limit: pageSize } } }
+            return { ...preState, ...{ params: { _page: page, _limit: pageSize, q} } }
         }, () => {
             store.dispatch(LoadUserActionAsync(this.state.params));
         });
@@ -144,6 +147,20 @@ class UserMgr extends Component {
             }
         })
     }
+    handleEdit = () => {
+       if(this.state.selectRowKeys.length !== 1){
+           message.error('please only select 1 item and edit!');
+           return;
+       }
+       //拿到要进行编辑的数据
+       const userId = this.state.selectRowKeys[0]
+       let editUser = store.getState().UserList.list.find(item => item.id === userId);
+       console.log(editUser);
+       this.setState({
+           showEditUserDialog:true,
+           editUserRow: editUser
+       })
+    }
     buttonStyle = { margin: '5px' };
     //#endregion
 
@@ -170,7 +187,22 @@ class UserMgr extends Component {
                 <hr />
                 <Button onClick={() => this.setState({ showAddUserDialog: true })} style={this.buttonStyle} type="primary">Add</Button>
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
-                <Button style={this.buttonStyle} type="primary">Modify</Button>
+                <Button onClick={this.handleEdit} style={this.buttonStyle} type="primary">Edit</Button>
+                <Input.Search 
+                   placeholder="search"
+                   onSearch={(value) => {
+                       //第一步 先把搜索的先参数放到state里面去
+                       this.setState((preState) => {
+                           preState.params.q = value;
+                           return {...preState};
+                       }, () => {
+                           //第二步 重新请求当前页面的数据
+                           this.changePage(1, 6, value);
+                       })
+                   }}
+                   enterButton 
+                   style={{margin:'5px', width:'300px'}}
+                />
                 <Table
                     bordered
                     style={{ backgroundColor: '#fefefe' }}

@@ -22,7 +22,7 @@ class Home extends Component {
     render() {
         const {match} = this.props;
         return (
-            <Layout style={{minHeight:'100vh'}}>
+            <Layout style={{height:'100vh'}}>
                 <Header style={{color:'#fff', padding:'0 15px'}}>
                     <Top history={this.props.history}></Top>
                 </Header>
@@ -41,7 +41,7 @@ class Home extends Component {
                 </Layout>
                 <Footer style={{backgroundColor: 'silver', height: '24px', padding: '0', lineHeight: '24px'}}>Footer</Footer>
             </Layout>
-        );
+        )
     }
 }
 
