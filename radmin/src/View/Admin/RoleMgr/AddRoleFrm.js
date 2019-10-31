@@ -17,7 +17,8 @@ class AddRoleFrm extends Component {
                     {getFieldDecorator('name', {
                         rules: [
                             {
-                                pattern: /\w{2,20}/gi,
+                                min:2,
+                                max:20,
                                 message: 'please type-in 2~20 strings!',
                             }, {
                                 required: true,
@@ -34,7 +35,8 @@ class AddRoleFrm extends Component {
                     {getFieldDecorator('name', {
                         rules: [
                             {
-                                pattern: /\w{2,20}/gi,
+                                min:2,
+                                max:20,
                                 message: 'please type-in 2~20 strings!',
                             }, {
                                 required: true,
