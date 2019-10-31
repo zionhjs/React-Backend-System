@@ -11,6 +11,7 @@ class UserMgr extends Component {
     state = {
         showAddUserDialog: false,   //显示要添加的对话框
         showEditUserDialog: false,   //显示要修改的对话框
+        editUserRow: null,   //当前编辑的用户信息
         unsubscribe: null,
         selectedRowKeys: [],
         userlist: store.getState().UserList.list,
@@ -43,7 +44,7 @@ class UserMgr extends Component {
                         <Button 
                            style={{ marginRight: '5px' }} 
                            type="primary"
-                           onClick={()=>this.setState({showEditUserDialog:true})}
+                           onClick={()=>this.setState({showEditUserDialog:true, editUserRow: row})}
                            >
                                Edit
                         </Button>
@@ -180,7 +181,7 @@ class UserMgr extends Component {
                     pagination={{ total: this.state.total, pageSize: 6, defaultCurrent: 1, onChange: this.changePage }}
                 ></Table>
                 <AddUser close={this.hideAddUserDialog} visible={this.state.showAddUserDialog}></AddUser>
-                <EditUser close={this.hideEditUserDialog} visible={this.state.showEditUserDialog}></EditUser>
+                <EditUser data={this.state.editUserRow} close={this.hideEditUserDialog} visible={this.state.showEditUserDialog}></EditUser>
             </div>
         );
     }
