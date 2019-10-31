@@ -3,7 +3,13 @@ import { Form, Input, Icon } from 'antd';
 
 class EditUserFrm extends Component {
     componentDidMount(){
-        this.props.form.setFieldsValue(this.props.data);
+        this.props.form.setFieldsValue({
+            name:this.props.data.name,
+            username:this.props.data.name,
+            mail:this.props.data.mail,
+            phone:this.props.data.phone,
+            password:this.props.data.password
+        });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
