@@ -98,6 +98,7 @@ class RoleMgr extends Component {
                     .then(res => {
                         message.info('delete success!');
                         this.loadData();
+                        this.setState({selectedRowKeys:[]});
                     })
                     .catch(err => {
                         console.log(err);
@@ -108,6 +109,14 @@ class RoleMgr extends Component {
     }
     handleEdit = (row) => {
         this.setState({showEditRoleDialog: true, editRole: row});
+    }
+    handleBarEdit = () => {
+        if(this.state.selectedRowKeys.length !== 1){
+            message.error('please only select 1 row and edit!');
+            return;
+        }
+        let editRow = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
+        if(editRole) this.handleEdit(editRole);
     }
     handleAdd = () => {
         this.setState({
@@ -197,7 +206,7 @@ class RoleMgr extends Component {
                 <hr />
                 <Button onClick={this.handleAdd} style={this.buttonStyle} type="primary">Add</Button>
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
-                <Button onClick={this.handleEdit} style={this.buttonStyle} type="primary">Edit</Button>
+                <Button onClick={this.handleBarEdit} style={this.buttonStyle} type="primary">Edit</Button>
                 <Input.Search
                     placeholder="search"
                     onSearch={this.handleSearch}
