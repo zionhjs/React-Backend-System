@@ -108,14 +108,14 @@ class RoleMgr extends Component {
             showAddRoleDialog:true
         })
     }
-    addRole  = (role) => {
+    addRole = (role) => {
         let newRole = Object.assign({
             id:Date.now(),
             del:0,
             subon:formatDate2String(new Date()),
             status:0
         },role);
-        service.AddRole(newRole)
+        service.addRole(newRole)
         .then(res => {
             message.info('add success!');
             //关闭当前对话框
