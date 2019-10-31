@@ -27,5 +27,8 @@ export default {
     },
     addRole(role){
         return axios.post('/per/role', role);
+    },
+    saveRole(role){
+        return axios.put(`/per/role/${role.id}`, role);
     }
 }

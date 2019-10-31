@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import AddRole from './AddRole';
 import AddUser from '../UserMgr/AddUser';
+import EditRole from './EditRole';
 import {formatDate2String} from '../../../Common/Helper';
 
 class RoleMgr extends Component {
     state = {
         showAddRoleDialog:false,
+        showEditRoleDialog:false,
         selectedRowKeys: [],
         params: {
             _page: 1,
@@ -55,7 +57,11 @@ class RoleMgr extends Component {
             render: (del, row) => {
                 return (
                     <div>
-                        <Button type="primary" style={{marginRight:'5px'}}>Edit</Button>
+                        <Button 
+                           type="primary" 
+                           style={{marginRight:'5px'}}
+                           onClick={() => this.handleEdit(row)}
+                        >Edit</Button>
                         <Popconfirm 
                            title="sure delete?"
                            okText="confirm"
@@ -100,8 +106,8 @@ class RoleMgr extends Component {
             }
         })
     }
-    handleEdit = () => {
-
+    handleEdit = (row) => {
+        this.setState({showEditRoleDialog: true, editRole: row});
     }
     handleAdd = () => {
         this.setState({
@@ -127,6 +133,18 @@ class RoleMgr extends Component {
             message.error('add failed!');
         })
     }
+    saveRole = (role) => {
+        service.saveRole(role)
+        .then(res => {
+            this.closeEditDialog();
+            this.loadData();
+            message.info('edit success!');
+        })
+        .catch(err => {
+            console.log(err);
+            message.error('edit failed!');
+        })
+    }
     handleSearch = (value) => {
         this.setState(preState => {
             preState.params.q = value;
@@ -141,7 +159,6 @@ class RoleMgr extends Component {
                 this.setState({ roleList: res.data, total: parseInt(res.headers['x-total-count']) });
             });
     }
-
     changePage = (page, pageSize) => {
         this.setState(preState => {
             preState.params._page = page;
@@ -154,6 +171,9 @@ class RoleMgr extends Component {
 
     closeAddDialog = () => {
         this.setState({showAddRoleDialog: false});
+    }
+    closeEditDialog = () => {
+        this.setState({showEditRoleDialog: false});
     }
     
     componentDidMount() {
@@ -205,6 +225,12 @@ class RoleMgr extends Component {
                    addRole={this.addRole}
                 >
                 </AddRole>
+                <EditRole 
+                   visible={this.state.showEditRoleDialog} 
+                   close={this.closeEditDialog}
+                   data={this.state.editRole}
+                   saveRole={this.saveRole}
+                />
             </div>
         );
     }
