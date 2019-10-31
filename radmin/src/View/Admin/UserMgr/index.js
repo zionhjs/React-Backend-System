@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import { LoadUserActionAsync } from '../../../Action/UserAction';
 import AddUser from './AddUser';
+import EditUser from './EditUser';
 import store from '../../../store';
 
 class UserMgr extends Component {
     state = {
-        showAddUserDialog: false,
+        showAddUserDialog: false,   //显示要添加的对话框
+        showEditUserDialog: false,   //显示要修改的对话框
         unsubscribe: null,
         selectedRowKeys: [],
         userlist: store.getState().UserList.list,
@@ -38,7 +40,13 @@ class UserMgr extends Component {
             render: (del, row) => {
                 return (
                     <div>
-                        <Button style={{ marginRight: '5px' }} type="primary">Edit</Button>
+                        <Button 
+                           style={{ marginRight: '5px' }} 
+                           type="primary"
+                           onClick={()=>this.setState({showEditUserDialog:true})}
+                           >
+                               Edit
+                        </Button>
                         <Popconfirm
                             onConfirm={() => {
                                 //message.info(row.id);
@@ -105,6 +113,10 @@ class UserMgr extends Component {
     hideAddUserDialog = () => {
         this.setState({ showAddUserDialog: false });
     }
+    hideEditUserDialog = () => {
+        this.setState({ showEditUserDialog: false});
+    }
+    
     handleDelete = () => {
         if (this.state.selectedRowKeys.length < 0) {
             message.warn('please select rows to delete!')
@@ -168,6 +180,7 @@ class UserMgr extends Component {
                     pagination={{ total: this.state.total, pageSize: 6, defaultCurrent: 1, onChange: this.changePage }}
                 ></Table>
                 <AddUser close={this.hideAddUserDialog} visible={this.state.showAddUserDialog}></AddUser>
+                <EditUser close={this.hideEditUserDialog} visible={this.state.showEditUserDialog}></EditUser>
             </div>
         );
     }
