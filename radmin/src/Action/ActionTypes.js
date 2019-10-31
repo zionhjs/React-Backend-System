@@ -3,5 +3,6 @@ export default {
     ADD_USER:'ADD_USER',
     EDIT_USER:'EDIT_USER',
 
-    LOAD_PER_LIST:'LOAD_PER_LIST'
+    LOAD_PER_LIST:'LOAD_PER_LIST',
+    ADD_PER:'ADD_PER'
 }

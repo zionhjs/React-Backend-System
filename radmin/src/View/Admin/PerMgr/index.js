@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Breadcrumb, Input, Button, message, Table } from 'antd';
 import { Link } from 'react-router-dom';
-import { LoadPerAsync } from '../../../Action/PerAction';
+import { LoadPerAsync, AddPerAsync } from '../../../Action/PerAction';
 import AddPer from './Addper';
 
 function mapStateToProps(state) {
@@ -16,6 +16,9 @@ function mapDispatchToProps(dispatch) {
     return {
         loadDataAsync: (params) => {
             dispatch(LoadPerAsync(params));
+        },
+        addPer:(per) => {
+            return dispatch(AddPerAsync(per));
         }
     };
 }
@@ -106,6 +109,10 @@ class PerMgr extends Component {
         this.setState({showAddPerDialog: false});
     }
 
+    // addPer = (per) => {
+    //     //发送ajax请求 添加权限数据到后台 然后重置redux的state  
+    // }
+
     //生命周期的钩子
     compinentDidMount(){
         this.loadData();
@@ -150,6 +157,7 @@ class PerMgr extends Component {
                 <AddPer 
                    visible={this.state.showAddPerDialog}
                    close={this.closeAddPerDialog}
+                   addPer={this.addPer}
                 >
                 </AddPer>
             </div>

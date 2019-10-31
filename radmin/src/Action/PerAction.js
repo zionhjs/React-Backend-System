@@ -17,3 +17,19 @@ export function LoadPerAsync(params){
                })      
     }
 }
+
+export function AddPer(payload){
+    return {
+        type:ActionTypes.ADD_PER,
+        payload
+    }
+}
+
+export function AddPerAsync(payload){
+    return dispatch => {
+        return service.addPer(per)
+               .then(res => {
+                   dispatch(AddPer(res.data))
+               })
+    }
+}
