@@ -72,7 +72,7 @@ class PerMgr extends Component {
             render:(del, row) => {
                 return (
                     <div>
-                        <Button type="primary">Edit</Button>
+                        <Button style={{marginRight:'5px'}} type="primary">Edit</Button>
                         <Button type="danger">Delete</Button>
                     </div>
                 )
@@ -83,12 +83,20 @@ class PerMgr extends Component {
     handleAdd = () => { }
     handleDelete = () => { }
     handleBarEdit = () => { }
-    handleSearch = () => { }
+    handleSearch = (value) => { 
+        this.setState(preState => {
+            let newState = {...preState};
+            newState.params.q = value;
+            return newState;
+        }, () => {
+            this.loadData();
+        })
+    }
     changePage = (page, pageSize) => { }
     loadData = () => {
         this.props.loadDataAsync(this.state.params);
     }
-    buttonStyle = { margin: '0 5px' }
+    buttonStyle = { margin: '5px' }
 
     //生命周期的钩子
     compinentDidMount(){
