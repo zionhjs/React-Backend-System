@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { Form, Input, Icon, message, Select, Option } from 'antd';
 
 class AddPerFrm extends Component {
+    componentDidMount(){
+        this.props.form.setFieldsValue({pId:0, type:'menu'})
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
+        const { Option } = Select;
+        
         return (
             <Form
                 layout="horizontal"
@@ -74,7 +79,7 @@ class AddPerFrm extends Component {
                 </Form.Item>
                 <Form.Item lable="Address">
                     {getFieldDecorator('url')(
-                        <Input prefix={<Icon type="user"></Icon>}
+                        <Input prefix={<Icon type="mail"></Icon>}
                             placeholder="Parentauth"
                         />
                     )}

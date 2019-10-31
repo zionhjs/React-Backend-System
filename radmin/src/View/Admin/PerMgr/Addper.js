@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal } from 'antd';
-import AddPerFrm from './index';
+import AddPerFrm from './AddPerFrm';
 
 const AddPerFrmComponent = Form.create({name:'add_per'})(AddPerFrm);
 
