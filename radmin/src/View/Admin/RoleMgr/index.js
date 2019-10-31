@@ -115,8 +115,10 @@ class RoleMgr extends Component {
             message.error('please only select 1 row and edit!');
             return;
         }
-        let editRow = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
-        if(editRole) this.handleEdit(editRole);
+        let editRole = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
+        if(editRole){
+            this.handleEdit(editRole);
+        } 
     }
     handleAdd = () => {
         this.setState({

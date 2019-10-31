@@ -30,5 +30,9 @@ export default {
     },
     saveRole(role){
         return axios.put(`/per/role/${role.id}`, role);
+    },
+    //权限相关的方法
+    loadPerListt(params){
+        return axios.get('./per/permission', {params});
     }
 }
