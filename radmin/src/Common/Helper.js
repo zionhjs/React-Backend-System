@@ -18,3 +18,7 @@ export function urlParams2Object(str){
     })
     return result;
 }
+
+export function formatDate2String(date){
+    return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
