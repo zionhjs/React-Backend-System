@@ -15,5 +15,8 @@ export default {
         return Promise.all(ids.map(id => {
             return axios.delete(`/per/user/${id}`);
         }));
+    },
+    updateUser(user){
+        return axios.put(`/per/user/${user.id}`, user);
     }
 }

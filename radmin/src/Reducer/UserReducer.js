@@ -8,6 +8,10 @@ export default function UserReducer(preState={list:[], total:0}, action){
             preState.list.shift(action.payload)
             preState.total+=1;
             return {...preState};
+        case ActionTypes.EDIT_USER:
+            let preUserIndex = preState.list.findIndex(item => item.id === action.payload.id);
+            preState.list.splice(preUserIndex, 1, action.payload);
+            return {...preState};
         default:
             return preState;
     }
