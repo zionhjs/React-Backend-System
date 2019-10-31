@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Form, Input, Icon } from 'antd';
 
 class AddRoleFrm extends Component {
+    componentDidMount(){
+        this.props.form.setFieldsValue({'pId':0});
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
@@ -53,7 +56,7 @@ class AddRoleFrm extends Component {
                             }
                         ],
                     })(
-                        <Input prefix={<Icon type="setting"></Icon>}
+                        <Input prefix={<Icon type="user"></Icon>}
                             placeholder="ParentRole"
                         />
                     )}
