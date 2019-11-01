@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Breadcrumb, Input, Button, message, Table } from 'antd';
 import { Link } from 'react-router-dom';
-import { LoadPerAsync, AddPerAsync } from '../../../Action/PerAction';
+import { LoadPerAsync, AddPerAsync, EditPerAsync } from '../../../Action/PerAction';
 import AddPer from './AddPer';
+import EditPer from './EditPer';
 
 function mapStateToProps(state) {
     return {
@@ -19,6 +20,9 @@ function mapDispatchToProps(dispatch) {
         },
         addPer:(per) => {
             return dispatch(AddPerAsync(per));
+        },
+        submitEditPer: (per) => {
+            return dispatch(EditPerAsync(per));
         }
     };
 }
@@ -95,7 +99,7 @@ class PerMgr extends Component {
     }
 
     handleAdd = () => { 
-        this.setState({showAddPerDialog: ture});
+        this.setState({showAddPerDialog: true});
     }
     handleDelete = () => { }
     handleBarEdit = () => { }
@@ -176,6 +180,7 @@ class PerMgr extends Component {
                    visible={this.state.showEditPerDialog}
                    close={this.closeEditPerDialog}
                    data={this.state.editPer}
+                   submitEditPer={this.props.submitEditPer}
                 >
                 </EditPer>
             </div>

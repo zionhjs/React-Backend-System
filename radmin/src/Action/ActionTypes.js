@@ -4,5 +4,6 @@ export default {
     EDIT_USER:'EDIT_USER',
 
     LOAD_PER_LIST:'LOAD_PER_LIST',
-    ADD_PER:'ADD_PER'
+    ADD_PER:'ADD_PER',
+    EDIT_PER:'EDIT_PER'
 }

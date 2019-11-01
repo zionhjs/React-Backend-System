@@ -27,9 +27,25 @@ export function AddPer(payload){
 
 export function AddPerAsync(payload){
     return dispatch => {
-        return service.addPer(per)
+        return service.addPer(payload)
                .then(res => {
                    dispatch(AddPer(res.data))
                })
+    }
+}
+
+export function EditPer(payload){
+    return {
+        type:ActionTypes.EDIT_PER,
+        payload
+    }
+}
+
+export function EditPerAsync(per){
+    return dispatch => {
+        return service.editPer(per)
+        .then(res => {
+            dispatch(EditPer(per));
+        });
     }
 }

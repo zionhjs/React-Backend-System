@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, message } from 'antd';
+import { Modal, message, Form } from 'antd';
 import AddPerFrm from './AddPerFrm';
 import { formatDate2String } from '../../../Common/Helper';
 import { GetLoginUserInfo } from '../../../Common/Auth';
@@ -44,7 +44,7 @@ class AddPer extends Component {
                 onOk={this.handleAddPer}
             >
                 <AddPerFrmComponent
-                    ref={fr => this.addFrm = frm}
+                    ref={frm => this.addFrm = frm}
                 />
             </Modal>
         );

@@ -38,5 +38,9 @@ export default {
     //添加权限的方法
     addPer(per){
         return axios.post('/per/permission', per);
+    },
+    //修改权限
+    editPer(per){
+        return axios.put(`./per/permission/${per.id}`, per);
     }
 }
