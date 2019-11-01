@@ -5,14 +5,24 @@ import service from '../../../Service';
 class SetRole extends Component {
     state = {
         allRoles: [],   //所有的角色信息的数组
+        userRoles: []   //当前用户已经关联的所有觉得中间表数据
     }
+    
     componentDidMount() {
-        //加载所有的角色
-        service.loadAllRoles()
+        //this.props.data => 当前设置角色的用户信息
+        service.loadUserRoles(this.props.data.id)
             .then(res => {
-                this.setState({ allRoles: res.data });
-            })
+                this.setState({ userRoles: res.data }, () => {
+                    //加载所有的角色
+                    service.loadAllRoles()
+                        .then(res => {
+                            this.setState({ allRoles: res.data }, () => {
+                            });
+                        });
+                });
+            });
     }
+
     render() {
         return (
             <Modal
@@ -28,9 +38,14 @@ class SetRole extends Component {
                 <Row>
                     {
                         this.state.allRoles.map(role => {
+                            let checked = false;
+                            //判断当前用户是否已经关联了当前的角色信息
+                            if(this.state.userRoles.find(userRole => userRole.roleId === role.id){
+                                checked = true;
+                            }
                             return (
                                 <Col span={8}>
-                                    <Checkbox>{role.name}</Checkbox>
+                                    <Checkbox defaultChecked={checked}>{role.name}</Checkbox>
                                 </Col>
                             );
                         })

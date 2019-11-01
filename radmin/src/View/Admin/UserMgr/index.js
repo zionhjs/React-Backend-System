@@ -230,7 +230,11 @@ class UserMgr extends Component {
                 ></Table>
                 <AddUser close={this.hideAddUserDialog} visible={this.state.showAddUserDialog}></AddUser>
                 <EditUser data={this.state.editUserRow} close={this.hideEditUserDialog} visible={this.state.showEditUserDialog}></EditUser>
-                <SetRole data={this.state.setRoleUser} close={this.hideSetRoleDialog} visible={this.state.showSetRoleDialog} />
+                {
+                    this.state.showSetRoleDialog ? 
+                    <SetRole data={this.state.setRoleUser} close={this.hideSetRoleDialog} visible={this.state.showSetRoleDialog} /> :
+                    null
+                }
             </div>
         );
     }
