@@ -8,19 +8,11 @@ class SetRole extends Component {
         userRoles: []   //当前用户已经关联的所有觉得中间表数据
     }
     
-    componentDidMount() {
+    async componentDidMount() {
         //this.props.data => 当前设置角色的用户信息
-        service.loadUserRoles(this.props.data.id)
-            .then(res => {
-                this.setState({ userRoles: res.data }, () => {
-                    //加载所有的角色
-                    service.loadAllRoles()
-                        .then(res => {
-                            this.setState({ allRoles: res.data }, () => {
-                            });
-                        });
-                });
-            });
+        let userRoles = await service.loadUserRoles(this.props.data.id);
+        let roles = await service.loadAllRoles();
+        this.setState({userRoles:userRoles, allRoles:roles});
     }
 
     render() {
