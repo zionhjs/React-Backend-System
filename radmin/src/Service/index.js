@@ -42,5 +42,11 @@ export default {
     //修改权限
     editPer(per){
         return axios.put(`./per/permission/${per.id}`, per);
+    },
+    //删除权限
+    deletePer(ids){
+        return Promise.all(ids.map(id => {
+            return axios.delete(`/per/permission/${id}`);
+        }));
     }
 }

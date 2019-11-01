@@ -5,5 +5,6 @@ export default {
 
     LOAD_PER_LIST:'LOAD_PER_LIST',
     ADD_PER:'ADD_PER',
-    EDIT_PER:'EDIT_PER'
+    EDIT_PER:'EDIT_PER',
+    DELETE_PER_IDS:'DELETE_PER_IDS'
 }
