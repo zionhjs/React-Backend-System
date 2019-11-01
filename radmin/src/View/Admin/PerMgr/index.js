@@ -115,6 +115,7 @@ class PerMgr extends Component {
                 this.loadData();
             })
             .catch(err => {
+                console.log(err);
                 message.error('delete failed!');
             })
     }
@@ -129,7 +130,13 @@ class PerMgr extends Component {
     handleAdd = () => {
         this.setState({ showAddPerDialog: true });
     }
-    handleDelete = () => { }
+    handleDelete = () => { 
+        if(this.state.selectedRowKeys.length <= 0){
+            message.error('please select data to delete!');
+            return;
+        }
+        this.deletePerIds(this.state.selectedRowKeys);
+    }
     submitDeletePer = (ids) => {
         //删除数据
     }

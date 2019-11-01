@@ -61,7 +61,7 @@ export function DeletePerAsync(ids){
     return dispatch => {
         return service.deletePer(ids)
         .then(res => {
-            dispatch(ids);
+            dispatch(DeletePer(ids));
         });
     }
 }
