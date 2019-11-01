@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Breadcrumb, Input, Button, message, Table, Popconfirm } from 'antd';
+import { Breadcrumb, Input, Button, message, Table, Popconfirm, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoadPerAsync, AddPerAsync, EditPerAsync, DeletePerAsync } from '../../../Action/PerAction';
 import AddPer from './AddPer';
@@ -135,7 +135,14 @@ class PerMgr extends Component {
             message.error('please select data to delete!');
             return;
         }
-        this.deletePerIds(this.state.selectedRowKeys);
+        Modal.confirm({
+            title:'sure to delete?',
+            okText:'confirm',
+            cancelText:'cancel',
+            onOK: () => {
+                this.deletePerIds(this.state.selectedRowKeys);
+            }
+        })
     }
     submitDeletePer = (ids) => {
         //删除数据
