@@ -68,8 +68,15 @@ export function getLoginToken(token){
 export function getLoginUserAllPer(){
     //拿到当前登录用户的id
     let userId = GetLoginUserInfo().id;
+    //第一步 先从缓存中获取当前登录用户的所有权限 如果有直接返回
+    let loginUserPerStr = sessionStorage.getItem('LOGIN_USER_PER');
+    if(loginUserPerStr){
+        return Promise.resolve(JSON.parse(loginUserPerStr));
+    }
+    //第二步 如果没有才发送ajax请求获取当前登录用户的所有权限
     return service.loadUserAllPer(userId)
     .then(res => {
+        sessionStorage.setItem('LOGIN_USER_PER', JSON.stringify(res.data));
         return res.data;
     })
 }
