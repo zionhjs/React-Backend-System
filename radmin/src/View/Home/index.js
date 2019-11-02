@@ -34,9 +34,9 @@ class Home extends Component {
                     <Content style={{padding:"15px"}}>
                         <Switch>
                             <AuthRoute per={} path={`${match.path}/user_mgr`} component={UserMgr}></AuthRoute>
-                            <Route path={`${match.path}/role_mgr`} component={RoleMgr}></Route>
-                            <Route path={`${match.path}/per_mgr`} component={PerMgr}></Route>
-                            <Route render={()=><h3>WELCOME USE OUR SYSTEM</h3>}></Route>
+                            <AuthRoute per={} path={`${match.path}/role_mgr`} component={RoleMgr}></Route>
+                            <AuthRoute per={} path={`${match.path}/per_mgr`} component={PerMgr}></Route>
+                            <AuthRoute per={} render={()=><h3>WELCOME USE OUR SYSTEM</h3>}></Route>
                         </Switch>
                     </Content>
                 </Layout>
