@@ -209,6 +209,7 @@ class RoleMgr extends Component {
 
     render() {
         let { selectedRowKeys } = this.state;
+        let setRolePerCom = null;
         return (
             <div>
                 <Breadcrumb>
@@ -263,10 +264,14 @@ class RoleMgr extends Component {
                    okText="Confirm"
                    cancelText="cancel"
                    onCancel={() => this.setState({showSetRolePerDialog:false})}
+                   onOk={() => {
+                       setRolePerCom.handleSubmitSetRolePer();
+                   }}
                 >
                     {
                         this.state.showSetRolePerDialog ?
-                            <SetRolePer data={this.state.setRolePer} /> :
+                            <SetRolePer close={() => this.setState({showSetRolePerDialog:false})} ref={setRP => setRolePerCom = setRP} data={this.state.setRolePer} /> 
+                            :
                             null
                     }
                 </Modal>

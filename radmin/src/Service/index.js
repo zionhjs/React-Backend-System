@@ -71,5 +71,13 @@ export default {
     },
     loadRolePer(roleId){
         return axios.get('/per/role_permission', {params:{roleId}});
+    },
+    //添加角色关联权限
+    addRolePer(rolePer){
+        return axios.post('/per/role_permission', rolePer);
+    },
+    //去掉角色和权限的关联
+    deleteRolePer(rolePerId){
+        return axios.delete(`/per/role_permission/{rolePerId}`)
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Row, Col, Checkbox} from 'antd';
+import {Row, Col, Checkbox, message} from 'antd';
+import { formatDate2String } from '../../../Common/Helper';
 import { red } from '@ant-design/colors';
 import service from '../../../Service';
 
@@ -25,6 +26,55 @@ class SetRolePer extends Component {
         
         this.setState({allPer, rolePer, allCheckedPer})
     }
+
+    handleSubmitSetRolePer = () => {
+        // console.log('1234');
+        let{ allCheckedPer, rolePer } = this.state;
+        let promiseArr = [];
+        // 添加的
+        allCheckedPer.forEach((per, index) => {
+            if(rolePer.findIndex(rp => rp.permissionId === per.Id) < 0){
+                //此时添加
+                promiseArr.push(service.addRolePer({
+                    id:Date.now() + index,
+                    del:0,
+                    subon:formatDate2String(new Date()),
+                    permissionId:per.id,
+                    roleId:this.props.data.id
+                }));
+            }
+        })
+        // 删除的
+        rolePer.forEach(rp => {
+            if(allCheckedPer.findIndex(per => per.id === rp.permissionId) < 0){
+                //删除
+                promiseArr.push(service.deleteRolePer(rp.id));
+            }
+        });
+        
+        Promise.all(promiseArr)
+        .then(res => {
+            message.info('set-success!');
+            this.props.close();
+        })
+        .catch(err => {
+            console.log('err:', err);
+            message.error('set-failed!');
+        })
+    }
+    
+    handleChangeChecked = (per ,e) => {
+        let allCheckedPer = [...this.state.allCheckedPer];
+        //一种 选中:
+        if(e.target.checked){
+            allCheckedPer.pus(per);
+        }else{
+            //二种 取消选中
+            allCheckedPer = allCheckedPer.filter(item => item.id !== per.id);
+        }
+        this.setState({allCheckedPer})
+    }
+
     render() {
         let {allPer, rolePer} = this.state;
         return (
@@ -39,7 +89,7 @@ class SetRolePer extends Component {
                             checked = index >= 0;
                             return (
                                 <Col key={per.id} span={8}>
-                                    <Checkbox defaultChecked={checked}>{per.des}</Checkbox>
+                                    <Checkbox onChange={(e) => {this.handleChangeChecked(per, e)}} defaultChecked={checked}>{per.des}</Checkbox>
                                 </Col>
                             )
                         })
