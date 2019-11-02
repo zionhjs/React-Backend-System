@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { LoadPerAsync, AddPerAsync, EditPerAsync, DeletePerAsync } from '../../../Action/PerAction';
 import AddPer from './AddPer';
 import EditPer from './EditPer';
+import { presetPalettes } from '@ant-design/colors';
 
 function mapStateToProps(state) {
     return {
@@ -166,7 +167,16 @@ class PerMgr extends Component {
             this.loadData();
         })
     }
-    changePage = (page, pageSize) => { }
+    changePage = (page, pageSize) => { 
+        this.setState(preState => {
+            let params = {...preState.params};
+            params._page= page;
+            params._limit = pageSize;
+            return Object.assign({},preState,{params}, () => {
+                this.loadData();
+            })
+        });
+    }
     loadData = () => {
         this.props.loadDataAsync(this.state.params);
     }

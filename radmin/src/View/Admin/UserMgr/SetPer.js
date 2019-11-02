@@ -10,7 +10,7 @@ class SetPer extends Component {
         userPer:[],   //用户权限的默认关联
         allCheckedPer:[]   //所有选中的权限
     }
-    
+   
     handleSubmitSetPer = () => {
         let {userPer, allCheckedPer} = this.state;
         let promiseArr = [];
@@ -26,7 +26,7 @@ class SetPer extends Component {
                     permissionId:per.id
                 }));
             }
-        })
+        });
         //删除
         userPer.forEach(up => {
             if(allCheckedPer.findIndex(per => per.id === up.permissionId) < 0){
@@ -99,8 +99,7 @@ class SetPer extends Component {
                            )
                        }) 
                     }
-                </Row>
-                
+                </Row> 
             </Modal>
         );
     }
