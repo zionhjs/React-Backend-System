@@ -64,5 +64,12 @@ export default {
     //删除用户和角色的关联
     deleteUserRole(id){
         return axios.delete(`/per/user_role/${id}`);
+    },
+    //加载所有的权限数据
+    loadAllPer(){
+        return axios.get('./per/permission');
+    },
+    loadRolePer(roleId){
+        return axios.get('/per/role_permission', {params:{roleId}});
     }
 }
