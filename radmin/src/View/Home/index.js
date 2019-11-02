@@ -5,6 +5,7 @@ import Top from '../../Components/Top';
 import MenuBar from '../../Components/MenuBar';
 import axios from 'axios';
 import { getLoginToken } from '../../Common/Auth';
+import {} from '../../Components/AuthRoute';
 
 import UserMgr from '../Admin/UserMgr';
 import RoleMgr from '../Admin/RoleMgr';
@@ -32,7 +33,7 @@ class Home extends Component {
                     </Sider>
                     <Content style={{padding:"15px"}}>
                         <Switch>
-                            <Route path={`${match.path}/user_mgr`} component={UserMgr}></Route>
+                            <AuthRoute per={} path={`${match.path}/user_mgr`} component={UserMgr}></AuthRoute>
                             <Route path={`${match.path}/role_mgr`} component={RoleMgr}></Route>
                             <Route path={`${match.path}/per_mgr`} component={PerMgr}></Route>
                             <Route render={()=><h3>WELCOME USE OUR SYSTEM</h3>}></Route>

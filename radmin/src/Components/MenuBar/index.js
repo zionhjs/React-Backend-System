@@ -37,6 +37,7 @@ class MenuBar extends Component {
                     {
                         rootMenu.map(rootM => {
                             let childMenus = this.state.perMenu.filter(m => m.pId == rootM.id);
+                            childMenus.sort((a,b) => b.order - a.order);
                             return (
                                 <SubMenu
                                 key={rootM.id}

@@ -1,3 +1,5 @@
+import service from "../Service";
+
 //当前登录用户的sessionStorage的key = const APP_LOGIN_USER...
 const APP_LOGIN_USER = 'APP_LOGIN_USER';
 
@@ -57,4 +59,17 @@ export function saveLoginToken(token){
  */
 export function getLoginToken(token){
     return sessionStorage.getItem('Authorization', token);
+}
+
+/**
+ * 获取当前登录用户的所有权限
+ * @return {Promise} 对象内部返回当前登录用户的所有权限
+ */
+export function getLoginUserAllPer(){
+    //拿到当前登录用户的id
+    let userId = GetLoginUserInfo().id;
+    return service.loadUserAllPer(userId)
+    .then(res => {
+        return res.data;
+    })
 }
