@@ -83,5 +83,13 @@ export default {
     //加载用户的所有关联的用户权限
     loadUserPer(userId){
         return axios.get('/per/user_permission', {params:{roleId}});
+    },
+    //添加用户关联的权限
+    addUserPer(userPer){
+        return axios.post('/per/user_permission', userPer);
+    },
+    //删除用户关联权限
+    deleteUserPer(id){
+        return axios.delete(`/per/role_permission/{id}`)
     }
 }
