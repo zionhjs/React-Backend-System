@@ -5,12 +5,14 @@ import service from '../../../Service';
 import AddRole from './AddRole';
 import AddUser from '../UserMgr/AddUser';
 import EditRole from './EditRole';
+import SetRolePer from './SetRolePer';
 import {formatDate2String} from '../../../Common/Helper';
 
 class RoleMgr extends Component {
     state = {
         showAddRoleDialog:false,
         showEditRoleDialog:false,
+        showSetRolePerDialog:false,
         selectedRowKeys: [],
         params: {
             _page: 1,
@@ -19,6 +21,7 @@ class RoleMgr extends Component {
             _sort: 'id',
             _order: 'desc'
         },
+        setRolePer:null,
         total: 0,
         roleList: [{
             "id": 5,
@@ -188,6 +191,15 @@ class RoleMgr extends Component {
     closeEditDialog = () => {
         this.setState({showEditRoleDialog: false});
     }
+    handleSetRolePer = () => {
+        if(this.state.selectedRowKeys.length !== 1){
+            message.error('please only select 1 role to setPermission');
+            return;
+        }
+        //roleId => selectedRowKeys[0]
+        let setRole = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
+        this.setState({showSetRolePerDialog: true, setRolePer:setRole});
+    }
     
     componentDidMount() {
         this.loadData();
@@ -211,6 +223,7 @@ class RoleMgr extends Component {
                 <Button onClick={this.handleAdd} style={this.buttonStyle} type="primary">Add</Button>
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
                 <Button onClick={this.handleBarEdit} style={this.buttonStyle} type="primary">Edit</Button>
+                <Button onClick={this.handleSetRolePer} style={this.buttonStyle} type="danger">SetPermission</Button>
                 <Input.Search
                     placeholder="search"
                     onSearch={this.handleSearch}
@@ -244,6 +257,19 @@ class RoleMgr extends Component {
                    data={this.state.editRole}
                    saveRole={this.saveRole}
                 />
+                <Modal
+                   visible={this.state.showSetRolePerDialog}
+                   title="setRole Permission"
+                   okText="Confirm"
+                   cancelText="cancel"
+                   onCancel={() => this.setState({showSetRolePerDialog:false})}
+                >
+                    {
+                        this.state.showSetRolePerDialog ?
+                            <SetRolePer data={this.state.setRolePer} /> :
+                            null
+                    }
+                </Modal>
             </div>
         );
     }
