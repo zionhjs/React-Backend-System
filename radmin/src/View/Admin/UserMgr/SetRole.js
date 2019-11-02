@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, Checkbox, Row, Col } from 'antd';
+import { Modal, Checkbox, Row, Col, message } from 'antd';
 import service from '../../../Service';
+import { formatDate2String } from '../../../Common/Helper';
 
 class SetRole extends Component {
     state = {
@@ -36,7 +37,43 @@ class SetRole extends Component {
         this.setState({allCheckedRole:checkedRoleArr});
     }
     handleSubmitSetRole = () => {
-        console.log(this.state.allCheckedRole);
+        // console.log(this.state.allCheckedRole);
+        let { allCheckedRole, userRoles } = this.state;
+        let promiseArr = [];
+        // 判断要添加的
+        // 最终的选中的role集合中 不在原来的关联表中存在 就是添加的新关联
+        allCheckedRole.forEach((role, index) => {
+            let add RoleIndex = userRoles.findIndex(userRole => userRole.roleId === role.id);
+            if(addRoleIndex < 0){
+                // 添加关联
+                let p1 = service.addUserRole({
+                    id:Date.now() + index, 
+                    del:0,
+                    subbon: formarDate2String(new Date()),
+                    roleId: role.id,
+                    userId: this.props.data.id
+                });
+                promiseArr.push(p1);
+            }
+        })
+        // 判断要删除的
+        userRoles.forEach(userRole => {
+            let searchRoleIndex = allCheckedRole.findIndex(role => role.id === userRole.roleId);
+            if(searchRoleIndex < 0){
+                // 进行删除的关系
+                let p2 = service.deleteUserRole(userRole.id);
+                promiseArr.push(p2);
+            }
+        });
+        Promise.all(promiseArr)
+        .then(res => {
+            message.info('set-success!')
+            this.props.close();
+        })
+        .catch(err => {
+            message.error('set-failed!');
+            console.log('err:', err);
+        });
     }
 
     render() {

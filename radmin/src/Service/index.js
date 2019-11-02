@@ -56,5 +56,13 @@ export default {
     //加载用户关联的角色信息
     loadUserRoles(userId){
         return axios.get('/per/user_role', {params:{userId}})
+    },
+    //给用户设置关联的角色信息
+    addUserRole(userRole){
+        return axios.post ('/per/user_role', userRole);
+    },
+    //删除用户和角色的关联
+    deleteUserRole(id){
+        return axios.delete(`/per/user_role/${id}`);
     }
 }
