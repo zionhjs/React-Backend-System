@@ -5,6 +5,7 @@ import service from '../../../Service';
 import { LoadUserActionAsync } from '../../../Action/UserAction';
 import AddUser from './AddUser';
 import SetRole from './SetRole';
+import SetPer from './SetPer';
 import EditUser from './EditUser';
 import store from '../../../store';
 
@@ -13,6 +14,8 @@ class UserMgr extends Component {
         showEditRoleDialog:false,   //显示设置用户角色对话框
         showAddUserDialog: false,   //显示要添加的对话框
         showEditUserDialog: false,   //显示要修改的对话框
+        showSetPerDialog: false,   //显示设置用户权限对话框
+        setPerUser:null,   //当前设置权限的用户的数据
         editUserRow: null,   //当前编辑的用户信息
         setRoleUser: null,   //当前设置角色的用户
         unsubscribe: null,
@@ -126,6 +129,9 @@ class UserMgr extends Component {
     hideSetRoleDialog = () => {
         this.setState({ showSetRoleDialog: false});
     }
+    hideSetPerDialog = () => {
+        this.setState({showSetPerDialog: false});
+    }
     
     handleDelete = () => {
         if (this.state.selectedRowKeys.length < 0) {
@@ -176,6 +182,15 @@ class UserMgr extends Component {
         let setRoleUser = this.state.userlist.find(item => item.id === setRoleUserId);
         this.setState({showSetRoleDialog: true, setRoleUser:setRoleUser});
     }
+    handleSetPer = () => {
+        if(this.state.selectedRowKeys.length !==1){
+            message.error('please choose only one row and set-permission');
+            return;
+        }
+        let setPerUserId = this.state.selectRowKeys[0];
+        let setPerUser = this.state.userlist.find(item => item.id === setPerUserId);
+        this.setState({showSetPerDialog: true, setPerUser:setPerUser});
+    }
     buttonStyle = { margin: '5px' };
     //#endregion
 
@@ -204,6 +219,7 @@ class UserMgr extends Component {
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
                 <Button onClick={this.handleEdit} style={this.buttonStyle} type="primary">Edit</Button>
                 <Button onClick={this.handleSetRole} style={this.buttonStyle} type="danger">SetRoles</Button>
+                <Button onClick={this.handleSetPer} style={this.buttonStyle} type="primary">SetPer</Button>
                 <Input.Search 
                    placeholder="search"
                    onSearch={(value) => {
@@ -233,6 +249,11 @@ class UserMgr extends Component {
                 {
                     this.state.showSetRoleDialog ? 
                     <SetRole data={this.state.setRoleUser} close={this.hideSetRoleDialog} visible={this.state.showSetRoleDialog} /> :
+                    null
+                }
+                {
+                    this.state.showSetPerDialog ? 
+                    <SetPer data={this.state.setPerUser} close={this.hideSetPerDialog} visible={this.state.showSetPerDialog} /> :
                     null
                 }
             </div>

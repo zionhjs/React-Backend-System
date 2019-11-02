@@ -79,5 +79,9 @@ export default {
     //去掉角色和权限的关联
     deleteRolePer(rolePerId){
         return axios.delete(`/per/role_permission/{rolePerId}`)
+    },
+    //加载用户的所有关联的用户权限
+    loadUserPer(userId){
+        return axios.get('/per/user_permission', {params:{roleId}});
     }
 }
