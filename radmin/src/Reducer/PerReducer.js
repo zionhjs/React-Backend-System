@@ -1,8 +1,8 @@
 import ActionTypes from '../Action/ActionTypes';
 
-export default function UserReducer(preState={list:[], total:0}, action){
-    let newState = {...preState};
-    switch(action.type){
+export default function UserReducer(preState = { list: [], total: 0 }, action) {
+    let newState = { ...preState };
+    switch (action.type) {
         case ActionTypes.DELETE_PER_IDS:
             newState.list = newState.list.filter(item => !action.payload.includes(item.id))
             newState.total = newState.total - action.payload.length;
