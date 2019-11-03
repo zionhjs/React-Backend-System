@@ -20,6 +20,7 @@ class Home extends Component {
         super(props);
         //设置当前用户ajax请求的token
         axios.defaults.headers['Authorization'] = getLoginToken();
+        sessionStorage.removeItem('LOGIN_USER_PER');
     }
     
     render() {
