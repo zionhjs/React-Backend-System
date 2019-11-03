@@ -7,56 +7,55 @@ import TextValidator from '../../Components/TextValidator/index';
 import { ValidatorForm } from 'react-form-validator-core';
 
 import service from '../../Service';
-import { SaveLoginUserInfo, saveLoginToken} from '../../Common/Auth';
+import { SaveLoginUserInfo, saveLoginToken } from '../../Common/Auth';
 import { message } from 'antd';
 import { urlParams2Object } from '../../Common/Helper';
 
 import './login.scss';
 
 class Login extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            username:'18911112222',
-            password:'aicoder.com',
-            code:'22222'
+            username: '18911112222',
+            password: 'aicoder.com',
+            code: '22222'
         }
     }
     handlerChange = e => {
-        let newState = {[e.target.name]: e.target.value};
-        this.setState(state => ({...this.state, ...newState}));
+        let newState = { [e.target.name]: e.target.value };
+        this.setState(state => ({ ...state, ...newState }));
     }
-    changeCode(e){
-        e.target.src = '/api/code/?id=' + Date.now();
+    changeCode(e) {
+        e.target.src = '/api/code?id=' + Date.now();
     }
 
     handleSubmit = () => {
-        // console.log('submit');
         let { history, location } = this.props;
         service.userLogin(this.state)
-        .then(res => {
-            // console.log(res.data);
-            if(res.data.code === 1){
-                //用Auth.js保存用户登录信息
-                SaveLoginUserInfo(res.data.user);
-                //保存用户的登录后 后台返回的token(后台返回的每个用户身份信息)
-                saveLoginToken(res.data.token);
-                //跳转到请求之前的页面
-                let url = '/home';   //判断当前请求的地址中是否有preurl
-                // location.search 
-                if(location.search){
-                    let params = urlParams2Object(location.search);
-                    if(params.preurl){
-                        url = params.preurl;
+            .then(res => {
+                // console.log(res.data);
+                if (res.data.code === 1) {
+                    // 保存用户登录信息
+                    SaveLoginUserInfo(res.data.user);
+                    // 保存用户的登录后，后台返回的tocken。身份信息。
+                    saveLoginToken(res.data.token);
+                    // 跳转到请求之前的页面。
+                    let url = '/home';
+                    // 判断当前请求地址中是否有 preurl。
+                    if (location.search) {
+                        let params = urlParams2Object(location.search);
+                        if (params.preurl) {
+                            url = params.preurl;
+                        }
                     }
+                    history.push(url);
+                } else {
+                    message.error('Login failed! Please type-in correct info!');
                 }
-                history.push(url);
-            }else{
-                message.error('login failed, type-in right info!');
-            }
-        });
+            });
     }
-    
+
     render() {
         return (
             <div className="login">
@@ -71,70 +70,69 @@ class Login extends Component {
                 <div className="main-bd">
                     <div className="login-box-wrap">
                         <div className="login-box container">
-                            <ValidatorForm className="login-group" onSubmit={this.handleSubmit}>
+                            <ValidatorForm
+                                onSubmit={this.handleSubmit}
+                                className="login-group"
+                            >
                                 <div className="input-group">
-                                    <img src={ICON_USER} alt="UserName" />
-                                    {/* <input name="username" onChange={this.handlerChange} value={this.state.username} placeholder="type phone number" type="text" /> */}
-                                    <TextValidator 
-                                    name="username" 
-                                    onChange={this.handlerChange} 
-                                    value={this.state.username} 
-                                    placeholder="type phone number" 
-                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z]{6,12}$']}
-                                    errorMessages={['*this field is require!', '*please type-in 6~12 strings!']}
-                                    >
-                                    </TextValidator>
+                                    <img src={ICON_USER} alt="用户名" />
+                                    {/* <input name="username" onChange={this.handlerChange} value={this.state.username} placeholder="请输入电话号码" type="text"/> */}
+                                    <TextValidator
+                                        name="username"
+                                        onChange={this.handlerChange}
+                                        value={this.state.username}
+                                        placeholder="请输入电话号码"
+                                        validators={['required', 'matchRegexp:^[0-9a-zA-Z]{6,12}$']}
+                                        errorMessages={['*用户名是必填项！', '*请输入6-12个字符！']}
+                                    ></TextValidator>
                                 </div>
                                 <div className="input-group grey-border">
-                                    <img src={ICON_LOCK} alt="UserName" />
-                                    {/* <input name="password" onChange={this.handlerChange} value={this.state.password} placeholder="type password" type="password" /> */}
-                                    <TextValidator 
-                                    name="password" 
-                                    onChange={this.handlerChange} 
-                                    value={this.state.password} 
-                                    placeholder="type password" 
-                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z.]{6,20}$']}
-                                    errorMessages={['*this field is require!', '*please type-in 6~20 strings!']}
-                                    >
-                                    </TextValidator>
+                                    <img src={ICON_LOCK} alt="用户名" />
+                                    <TextValidator
+                                        type="password"
+                                        name="password"
+                                        onChange={this.handlerChange}
+                                        value={this.state.password}
+                                        placeholder="请输入密码"
+                                        validators={['required', 'matchRegexp:^[0-9a-zA-Z.]{6,20}$']}
+                                        errorMessages={['*密码是必填项！', '*请输入6-20']}
+                                    />
                                 </div>
                                 <div className="code-group input-group">
-                                    {/* <input name="code" onChange={this.handlerChange} value={this.state.code} placeholder="type verification"  className="code" type="text" /> */}
-                                    <TextValidator 
-                                    name="code" 
-                                    onChange={this.handlerChange} 
-                                    value={this.state.code} 
-                                    type="text"
-                                    placeholder="type verification" 
-                                    className="code"
-                                    validators={['required', 'matchRegexp:^[0-9a-zA-Z]{5}$']}
-                                    errorMessages={['*this field is require!', '*please type-in 5 verificated strings!']}
-                                    >
-                                    </TextValidator>
+                                    <TextValidator
+                                        name="code"
+                                        onChange={this.handlerChange}
+                                        value={this.state.code}
+                                        type="text"
+                                        placeholder="请输入验证码"
+                                        className="code"
+                                        validators={['required', 'matchRegexp:^[0-9a-zA-Z]{5}$']}
+                                        errorMessages={['*验证码是必填项！', '*请输入5个字符验证码！']}
+                                    />
                                     <div className="img-code">
                                         <img onClick={e => this.changeCode(e)} src="/api/code" alt="" />
                                     </div>
                                 </div>
-                                <button className="login-btn-group">
-                                    Login
-                                </button>
+                                <button className="login-btn-grop">
+                                    登录
+                      </button>
                                 <div className="link-group">
-                                    Forgot Password?
-                                </div>
+                                    忘记密码?
+                      </div>
                             </ValidatorForm>
                             <div className="login-aside">
-                                <p>Not Registered Yet</p>
-                                <p className="active">Register Now!</p>
+                                <p>还没注册？</p>
+                                <p className="active">立即注册>></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="main-ft">
-                    &copy;copyright google.com 2016-2019
-                </div>
+                    &copy;版权所有 aicoder.com 2016-2019
+              </div>
             </div>
-        );
+        )
     }
 }
 
-export default Login;
+export default Login
