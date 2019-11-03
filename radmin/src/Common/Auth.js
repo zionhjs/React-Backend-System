@@ -73,7 +73,7 @@ export function getLoginUserAllPer(){
     if(loginUserPerStr){
         return Promise.resolve(JSON.parse(loginUserPerStr));
     }
-    //第二步 如果没有才发送ajax请求获取当前登录用户的所有权限
+    //第二步 如果没有存在loginUserPerStr才发送ajax请求获取当前登录用户的所有权限
     return service.loadUserAllPer(userId)
     .then(res => {
         sessionStorage.setItem('LOGIN_USER_PER', JSON.stringify(res.data));
