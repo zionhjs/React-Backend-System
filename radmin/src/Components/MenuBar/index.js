@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import { getLoginUserALlPer } from '../../Service';
 
@@ -12,7 +12,7 @@ class MenuBar extends Component {
     componentDidMount() {
         //加载当前登录用户的所有权限
         // service.loadUserAllPer(GetLoginUserInfo().id)
-        getLoginUserALlPer()
+        getLoginUserAllPer()
             .then(res => {
                 this.setState({ perMenu: res.data.filter(m => m.type === 'menu') });
             })

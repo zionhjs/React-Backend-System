@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Icon, Modal } from 'antd';
-import './top.scss';
-
 import {GetLoginUserInfo, Logout} from '../../Common/Auth';
+
+import './top.scss';
 
 class Top extends Component {
     state = {loginUser: GetLoginUserInfo()}
