@@ -30,11 +30,11 @@ class AuthRoute extends Component {
         //per属性是当前路由对应的权限数据的id
         //this.props.per
         //拿到当前登录用户的所有权限
-        // getLoginUserAllPer()
-        // .then(res => {
-        //     let authorized = res.findIndex(per => per.id === this.props.per) >= 0
-        //     this.setState({authorized});
-        // })
+        getLoginUserAllPer()
+        .then(res => {
+            let authorized = res.findIndex(per => per.id === this.props.per) >= 0
+            this.setState({authorized});
+        })
     }
 
     render() {

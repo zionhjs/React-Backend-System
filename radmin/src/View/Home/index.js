@@ -6,6 +6,8 @@ import MenuBar from '../../Components/MenuBar';
 import axios from 'axios';
 import { getLoginToken } from '../../Common/Auth';
 import {} from '../../Components/AuthRoute';
+import AuthRoute from '../../Components/AuthRoute';
+import GoodsMgr from '../GoodsMgr';
 
 import UserMgr from '../Admin/UserMgr';
 import RoleMgr from '../Admin/RoleMgr';
@@ -36,7 +38,8 @@ class Home extends Component {
                             <AuthRoute per={} path={`${match.path}/user_mgr`} component={UserMgr}></AuthRoute>
                             <AuthRoute per={} path={`${match.path}/role_mgr`} component={RoleMgr}></Route>
                             <AuthRoute per={} path={`${match.path}/per_mgr`} component={PerMgr}></Route>
-                            <AuthRoute per={} render={()=><h3>WELCOME USE OUR SYSTEM</h3>}></Route>
+                            <Route path={`${match.path}/goods_mgr`} component={GoodsMgr}></Route>
+                            <Route >Welcome to use aicoder.com backend-management system</Route>
                         </Switch>
                     </Content>
                 </Layout>
