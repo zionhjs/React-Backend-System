@@ -5,5 +5,5 @@ export default function Empty() {
         <div>
             404, Unmatched!
         </div>
-    )
+    );
 }
