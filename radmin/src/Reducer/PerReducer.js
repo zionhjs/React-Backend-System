@@ -13,7 +13,7 @@ export default function UserReducer(preState = { list: [], total: 0 }, action) {
             return newState;
         case ActionTypes.EDIT_PER:
             let editPerIndex = newState.list.findIndex(item => item.id === action.payload.id);
-            newState.list.splice(editPerIndex, 1, action.payload);
+            newState.list.splice(editPerIndex, 1, action.payload);   //array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
             return newState;
         case ActionTypes.LOAD_PER_LIST:
             return action.payload;
