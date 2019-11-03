@@ -2,14 +2,13 @@ import axios from 'axios';
 
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    // 在此判断当前用户是否拥有请求此地址的权限，如果有那么放行，如果没有那么需要
-    // 截断此请求
+    // 在此判断当前用户是否拥有请求此地址的权限，如果有那么放行，如果没有那么需要截断此请求
     // 如何判断当前用户是否拥有此请求权限
     console.log(config.url); // 你要请求的url地址。
     // return Promise.reject({msg: '没有权限'});
     return config;
 }, function (error) {
-    // Do something with request error
+    //对请求错误做点什么
     return Promise.reject(error);
 });
 
