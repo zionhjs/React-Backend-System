@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-
 import { Menu, Icon } from 'antd';
-import service from '../../Service';
-import { GetLoginUserInfo, getLoginUserALlPer } from '../../Service';
+import { getLoginUserALlPer } from '../../Service';
+
 const { SubMenu } = Menu;
 
 class MenuBar extends Component {
