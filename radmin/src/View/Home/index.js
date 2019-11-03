@@ -7,7 +7,7 @@ import UserMgr from '../Admin/UserMgr';
 import RoleMgr from '../Admin/RoleMgr';
 import PerMgr from '../Admin/PerMgr';
 import axios from 'axios';
-import { getLoginTocken } from '../../Common/Auth';
+import { getLoginToken } from '../../Common/Auth';
 import AuthRoute from '../../Components/AuthRoute';
 import GoodsMgr from '../GoodsMgr';
 
@@ -15,7 +15,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         // 设置当前用户ajax请求的token
-        axios.defaults.headers['Authorization'] = getLoginTocken();
+        axios.defaults.headers['Authorization'] = getLoginToken();
         sessionStorage.removeItem('LOGIN_USER_PER');
     }
 
