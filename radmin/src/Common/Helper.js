@@ -4,7 +4,7 @@
  * @returns {Object}
  */
 export function urlParams2Object(str){
-    //str:?str=1232&name=asd
+    //str:?str=1232&name=asd 是url协议的 参数部分
     console.log(str);
     if(!str){
         return null;
