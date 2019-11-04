@@ -47,44 +47,44 @@ class PerMgr extends Component {
         columns: [{
             key: 'id',
             dataIndex: 'id',
-            title: '编号'
+            title: 'Numbering'
         }, {
             key: 'type',
             dataIndex: 'type',
-            title: '权限类型'
+            title: 'Permission_Type'
         }, {
             key: 'des',
             dataIndex: 'des',
-            title: '权限描述'
+            title: 'Permission_Des'
         }, {
             key: 'url',
             dataIndex: 'url',
-            title: '地址'
+            title: 'Url'
         }, {
             key: 'pId',
             dataIndex: 'pId',
-            title: '父权限'
+            title: 'Parent_Permission'
         }, {
             key: 'order',
             dataIndex: 'order',
-            title: '排序'
+            title: 'Order'
         }, {
             key: 'del',
             dataIndex: 'del',
-            title: '编辑',
+            title: 'Edit',
             render: (del, row) => {
                 return (
                     <div>
                         <Button onClick={() => this.showEditPer(row)} style={{ marginRight: '5px' }} type="primary">编辑</Button>
                         <Popconfirm
-                            title="您是否真要删除吗？"
-                            okText="确认"
-                            cancelText="取消"
+                            title="SureToDelete?"
+                            okText="Confirm"
+                            cancelText="cancel"
                             onConfirm={() => {
                                 this.deletePerIds([row.id])
                             }}
                         >
-                            <Button type="danger">删除</Button>
+                            <Button type="danger">DELETE</Button>
                         </Popconfirm>
                     </div>
                 );
@@ -97,7 +97,7 @@ class PerMgr extends Component {
         this.props
             .submitDeletePer(ids)
             .then(res => {
-                message.info('删除成功！');
+                message.info('Delete Success! ');
                 let arr = this.state.selectedRowKeys;
                 let newArr = arr.filter(item => !ids.includes(item))
                 this.setState({ selectedRowKeys: newArr })
@@ -105,7 +105,7 @@ class PerMgr extends Component {
             })
             .catch(err => {
                 console.log(err);
-                message.error('删除失败！');
+                message.error('Delete Failed! ');
             })
     }
 
@@ -121,13 +121,13 @@ class PerMgr extends Component {
     }
     handleDelete = () => {
         if (this.state.selectedRowKeys.length <= 0) {
-            message.error('请选择数据进行删除!');
+            message.error('please selecet rows to delete! ');
             return;
         }
         Modal.confirm({
-            title: '确认要删除吗？',
-            okText: '确认',
-            cancelText: '取消',
+            title: 'Sure to delete?',
+            okText: 'Confirm',
+            cancelText: 'cancel',
             onOk: () => {
                 this.deletePerIds(this.state.selectedRowKeys);
             }
@@ -136,7 +136,7 @@ class PerMgr extends Component {
     handleBarEdit = () => {
         // 判断当前选中的条数。
         if (this.state.selectedRowKeys.length !== 1) {
-            message.error('请选择一条进行修改');
+            message.error('please only select one-row to edit! ');
             return;
         }
         let editPerId = this.state.selectedRowKeys[0];

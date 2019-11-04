@@ -13,6 +13,7 @@ class EditPerFrm extends Component {
         url: data.url,
       });
     }
+    
     render () {
       const { getFieldDecorator } = this.props.form;
       const { Option } = Select;
