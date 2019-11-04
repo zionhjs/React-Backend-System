@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Checkbox, Row, Col, message } from 'antd'
 import service from '../../../Service';
 import { formatDate2String } from '../../../Common/Helper';
+
 class SetRole extends Component {
     state = {
         allRoles: [],       // 所有的角色信息的数组
