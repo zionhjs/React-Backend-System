@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Input, Icon, Upload, Button } from 'antd';
-import { getLoginTocken } from '../../../Common/Auth';
+import { getLoginToken } from '../../../Common/Auth';
 
 class AddUserFrm extends Component {
     handleChangeAvatar = (e) => {
@@ -32,7 +32,7 @@ class AddUserFrm extends Component {
                         <Upload
                             accept="image/*"
                             action="/per/upload"
-                            headers={{ Authorization: getLoginTocken() }}
+                            headers={{ Authorization: getLoginToken() }}
                             name="imgF"
                             listType="picture"
                             onChange={this.handleChangeAvatar}

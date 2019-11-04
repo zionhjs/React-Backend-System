@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Form } from 'antd';
-import EditRoleFrm from './EidtRoleFrm';
+import EditRoleFrm from './EditRoleFrm';
 
 const EditRoleFrmComponent = Form.create({ name: 'frm_edit' })(EditRoleFrm);
 class EditRole extends Component {

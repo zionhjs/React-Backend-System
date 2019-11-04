@@ -5,7 +5,7 @@ import service from '../../../Service';
 import AddRole from './AddRole';
 import EditRole from './EditRole';
 import SetRolePer from './SetRolePer';
-import { formateDate2String } from '../../../Common/Helper';
+import { formatDate2String } from '../../../Common/Helper';
 
 class RoleMgr extends Component {
     state = {
@@ -138,7 +138,7 @@ class RoleMgr extends Component {
         let newRole = Object.assign({
             id: Date.now(),
             del: 0,
-            subon: formateDate2String(new Date()),
+            subon: formatDate2String(new Date()),
             status: 0
         }, role);
         console.log(newRole);

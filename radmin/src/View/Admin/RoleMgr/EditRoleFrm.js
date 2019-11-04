@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Input, Icon } from 'antd';
+
 class EditRoleFrm extends Component {
   componentDidMount() {
     let role = this.props.data;

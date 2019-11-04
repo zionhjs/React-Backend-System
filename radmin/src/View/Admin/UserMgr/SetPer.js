@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Row, Col, message, Checkbox } from 'antd'
-import { formateDate2String } from '../../../Common/Helper';
+import { formatDate2String } from '../../../Common/Helper';
 import { red } from '@ant-design/colors';
 import service from '../../../Service';
 
@@ -20,7 +20,7 @@ class SetPer extends Component {
                 promiseArr.push(service.addUserPer({
                     id: Date.now() + index,
                     del: 0,
-                    subon: formateDate2String(new Date()),
+                    subon: formatDate2String(new Date()),
                     userId: this.props.data.id,
                     permissionId: per.id
                 }));

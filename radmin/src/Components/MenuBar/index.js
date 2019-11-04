@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
 import { Menu, Icon } from 'antd';
-import { getLoginUserALlPer } from '../../Service';
+import { getLoginUserAllPer } from '../../Common/Auth';
 
 const { SubMenu } = Menu;
 

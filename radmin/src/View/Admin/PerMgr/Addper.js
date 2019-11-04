@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Form, message } from 'antd'
 import AddPerFrm from './AddPerFrm';
-import { formateDate2String } from '../../../Common/Helper';
+import { formatDate2String } from '../../../Common/Helper';
 import { GetLoginUserInfo } from '../../../Common/Auth';
 
 const AddPerFrmComponent = Form.create({ name: 'add_per' })(AddPerFrm);
@@ -17,7 +17,7 @@ class AddPer extends Component {
                 id: Date.now(),
                 del: 0,
                 status: 0,
-                subon: formateDate2String(new Date()),
+                subon: formatDate2String(new Date()),
                 subby: GetLoginUserInfo().id
             }, values);
             this.props.addPer(newPer)

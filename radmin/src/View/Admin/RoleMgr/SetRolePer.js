@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Checkbox, message } from 'antd';
-import { formateDate2String } from '../../../Common/Helper';
+import { formatDate2String } from '../../../Common/Helper';
 import { blue } from '@ant-design/colors';
 import service from '../../../Service';
 
@@ -39,7 +39,7 @@ class SetRolePer extends Component {
                 promiseArr.push(service.addRolePer({
                     id: Date.now() + index,
                     del: 0,
-                    subon: formateDate2String(new Date()),
+                    subon: formatDate2String(new Date()),
                     permissionId: per.id,
                     roleId: this.props.data.id
                 }));

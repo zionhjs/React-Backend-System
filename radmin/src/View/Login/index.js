@@ -75,27 +75,27 @@ class Login extends Component {
                                 className="login-group"
                             >
                                 <div className="input-group">
-                                    <img src={ICON_USER} alt="用户名" />
+                                    <img src={ICON_USER} alt="User_name" />
                                     {/* <input name="username" onChange={this.handlerChange} value={this.state.username} placeholder="请输入电话号码" type="text"/> */}
                                     <TextValidator
                                         name="username"
                                         onChange={this.handlerChange}
                                         value={this.state.username}
-                                        placeholder="请输入电话号码"
+                                        placeholder="please type-in phone-number"
                                         validators={['required', 'matchRegexp:^[0-9a-zA-Z]{6,12}$']}
-                                        errorMessages={['*用户名是必填项！', '*请输入6-12个字符！']}
+                                        errorMessages={['*Username is required!', '*please type-in 6~12 strings!']}
                                     ></TextValidator>
                                 </div>
                                 <div className="input-group grey-border">
-                                    <img src={ICON_LOCK} alt="用户名" />
+                                    <img src={ICON_LOCK} alt="username" />
                                     <TextValidator
                                         type="password"
                                         name="password"
                                         onChange={this.handlerChange}
                                         value={this.state.password}
-                                        placeholder="请输入密码"
+                                        placeholder="please type-in password"
                                         validators={['required', 'matchRegexp:^[0-9a-zA-Z.]{6,20}$']}
-                                        errorMessages={['*密码是必填项！', '*请输入6-20']}
+                                        errorMessages={['*password is required', '*please type-in 6~20 strings!']}
                                     />
                                 </div>
                                 <div className="code-group input-group">
@@ -104,31 +104,31 @@ class Login extends Component {
                                         onChange={this.handlerChange}
                                         value={this.state.code}
                                         type="text"
-                                        placeholder="请输入验证码"
+                                        placeholder="please enter verification code"
                                         className="code"
                                         validators={['required', 'matchRegexp:^[0-9a-zA-Z]{5}$']}
-                                        errorMessages={['*验证码是必填项！', '*请输入5个字符验证码！']}
+                                        errorMessages={['*verification code is requried', '*please type-in 5 digit verifycation-code']}
                                     />
                                     <div className="img-code">
                                         <img onClick={e => this.changeCode(e)} src="/api/code" alt="" />
                                     </div>
                                 </div>
                                 <button className="login-btn-grop">
-                                    登录
+                                    Login
                       </button>
                                 <div className="link-group">
-                                    忘记密码?
+                                    forgot password?
                       </div>
                             </ValidatorForm>
                             <div className="login-aside">
-                                <p>还没注册？</p>
-                                <p className="active">立即注册>></p>
+                                <p>Not registered yet?</p>
+                                <p className="active">Register now!>></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="main-ft">
-                    &copy;版权所有 aicoder.com 2016-2019
+                    &copy;copyright google.com 2016-2019
               </div>
             </div>
         )

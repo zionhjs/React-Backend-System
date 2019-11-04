@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Checkbox, Row, Col, message } from 'antd'
 import service from '../../../Service';
-import { formateDate2String } from '../../../Common/Helper';
+import { formatDate2String } from '../../../Common/Helper';
 class SetRole extends Component {
     state = {
         allRoles: [],       // 所有的角色信息的数组
@@ -48,7 +48,7 @@ class SetRole extends Component {
                 let p1 = service.addUserRole({
                     id: Date.now() + index,
                     del: 0,
-                    subon: formateDate2String(new Date()),
+                    subon: formatDate2String(new Date()),
                     roleId: role.id,
                     userId: this.props.data.id
                 });
