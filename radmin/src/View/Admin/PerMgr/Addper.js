@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Modal, message, Form } from 'antd';
+import React, { Component } from 'react'
+import { Modal, Form, message } from 'antd'
 import AddPerFrm from './AddPerFrm';
-import { formatDate2String } from '../../../Common/Helper';
-import { GetLoginUserInfo } from '../../../Common/Auth';
+import { formateDate2String } from '../../../Common/Helper';
+import { GetLoginUserInfo }  from '../../../Common/Auth';
 
 const AddPerFrmComponent = Form.create({ name: 'add_per' })(AddPerFrm);
 

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { LoadPerAsync, AddPerAsync, EditPerAsync, DeletePerAsync } from '../../../Action/PerAction';
 import AddPer from './AddPer';
 import EditPer from './EditPer';
-import { presetPalettes } from '@ant-design/colors';
 
 function mapStateToProps(state) {
     return {
@@ -26,7 +25,7 @@ function mapDispatchToProps(dispatch) {
             return dispatch(EditPerAsync(per));
         },
         submitDeletePer: (ids) => {
-            //删除数据
+            // 删除数据
             return dispatch(DeletePerAsync(ids));
         }
     };
@@ -36,7 +35,7 @@ class PerMgr extends Component {
     state = {
         showAddPerDialog: false,
         showEditPerDialog: false,
-        editPer: null,   // 存储当前正在编辑的权限数据对象
+        editPer: null,              // 当前正在编辑的 权限数据对象
         params: {
             _limit: 6,
             _page: 1,
@@ -45,38 +44,26 @@ class PerMgr extends Component {
             _order: 'desc'
         },
         selectedRowKeys: [],
-        colunms: [{
+        columns: [{
             key: 'id',
-            dateIndex: 'id',
-            title: 'Numbering'
+            dataIndex: 'id',
+            title: '编号'
         }, {
             key: 'type',
             dataIndex: 'type',
-            title: 'Permission Type'
+            title: '权限类型'
         }, {
             key: 'des',
             dataIndex: 'des',
-            title: 'Description Type'
-        }, {
-            key: 'status',
-            dataIndex: 'status',
-            title: 'Permission Status'
-        }, {
-            key: 'subon',
-            dataIndex: 'type',
-            title: 'Submit Time'
-        }, {
-            key: 'code',
-            dataIndex: 'code',
-            title: 'Auth Code'
+            title: '权限描述'
         }, {
             key: 'url',
             dataIndex: 'url',
-            title: 'Address'
+            title: '地址'
         }, {
             key: 'pId',
             dataIndex: 'pId',
-            title: 'Parent Auth'
+            title: '父权限'
         }, {
             key: 'order',
             dataIndex: 'order',
@@ -84,40 +71,41 @@ class PerMgr extends Component {
         }, {
             key: 'del',
             dataIndex: 'del',
-            title: 'edit',
+            title: '编辑',
             render: (del, row) => {
                 return (
                     <div>
-                        <Button onClick={() => this.showEditPer(row)} style={{ marginRight: '5px' }} type="primary">Edit</Button>
+                        <Button onClick={() => this.showEditPer(row)} style={{ marginRight: '5px' }} type="primary">编辑</Button>
                         <Popconfirm
-                            title="Delete Info"
-                            okText="confirm"
-                            cancelText="cancel"
+                            title="您是否真要删除吗？"
+                            okText="确认"
+                            cancelText="取消"
                             onConfirm={() => {
                                 this.deletePerIds([row.id])
                             }}
                         >
-                            <Button type="danger">Delete</Button>
+                            <Button type="danger">删除</Button>
                         </Popconfirm>
                     </div>
-                )
+                );
             }
         }]
     }
 
     deletePerIds = (ids) => {
-        this.props.submitDeletePer(ids)
+        console.log(ids);
+        this.props
+            .submitDeletePer(ids)
             .then(res => {
-                message.info('delete success!');
+                message.info('删除成功！');
                 let arr = this.state.selectedRowKeys;
-                let newArr = arr.filter(item => !ids.includes(item));
-                console.log(newArr);
-                this.setState({ selectedRowKeys: newArr});
+                let newArr = arr.filter(item => !ids.includes(item))
+                this.setState({ selectedRowKeys: newArr })
                 this.loadData();
             })
             .catch(err => {
                 console.log(err);
-                message.error('delete failed!');
+                message.error('删除失败！');
             })
     }
 
@@ -125,33 +113,30 @@ class PerMgr extends Component {
         this.setState({
             showEditPerDialog: true,
             editPer: per
-        })
+        });
     }
 
     handleAdd = () => {
         this.setState({ showAddPerDialog: true });
     }
-    handleDelete = () => { 
-        if(this.state.selectedRowKeys.length <= 0){
-            message.error('please select data to delete!');
+    handleDelete = () => {
+        if (this.state.selectedRowKeys.length <= 0) {
+            message.error('请选择数据进行删除!');
             return;
         }
         Modal.confirm({
-            title:'sure to delete?',
-            okText:'confirm',
-            cancelText:'cancel',
-            onOK: () => {
+            title: '确认要删除吗？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
                 this.deletePerIds(this.state.selectedRowKeys);
             }
         })
     }
-    submitDeletePer = (ids) => {
-        //删除数据
-    }
     handleBarEdit = () => {
-        //判断当前选中的条数
+        // 判断当前选中的条数。
         if (this.state.selectedRowKeys.length !== 1) {
-            message.error('please only select 1 row to edit!');
+            message.error('请选择一条进行修改');
             return;
         }
         let editPerId = this.state.selectedRowKeys[0];
@@ -167,14 +152,14 @@ class PerMgr extends Component {
             this.loadData();
         })
     }
-    changePage = (page, pageSize) => { 
+    changePage = (page, pageSize) => {
         this.setState(preState => {
-            let params = {...preState.params};
-            params._page= page;
+            let params = { ...preState.params };
+            params._page = page;
             params._limit = pageSize;
-            return Object.assign({},preState,{params}, () => {
-                this.loadData();
-            })
+            return Object.assign({}, preState, { params })
+        }, () => {
+            this.loadData();
         });
     }
     loadData = () => {
@@ -189,12 +174,8 @@ class PerMgr extends Component {
         this.setState({ showEditPerDialog: false });
     }
 
-    // addPer = (per) => {
-    //     //发送ajax请求 添加权限数据到后台 然后重置redux的state  
-    // }
-
     //生命周期的钩子
-    compinentDidMount() {
+    componentDidMount() {
         this.loadData();
     }
 
@@ -204,10 +185,10 @@ class PerMgr extends Component {
             <div>
                 <Breadcrumb>
                     <Breadcrumb.Item>
-                        <Link to="/home">Home</Link>
+                        <Link to="/home">HomePage</Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <Link to="/home/per_mgr">AuthManegement</Link>
+                        <Link to="/home/per_mgr">Auth-Management</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <hr />
@@ -222,10 +203,10 @@ class PerMgr extends Component {
                 />
                 <Table
                     bordered
-                    style={{ backgroundColor: '#fefefe' }}
-                    dataSource={this.state.perList}
+                    style={{ backgroundColor: '#FEFEFE' }}
+                    dataSource={this.props.perList}
                     columns={this.state.columns}
-                    rowKey="id"   //react要求必须对其指定唯一的key 不然会报错
+                    rowKey="id"
                     rowSelection={{
                         selectedRowKeys: selectedRowKeys,
                         onChange: (selectedRowKeys, selectedRows) => {
@@ -238,15 +219,13 @@ class PerMgr extends Component {
                     visible={this.state.showAddPerDialog}
                     close={this.closeAddPerDialog}
                     addPer={this.props.addPer}
-                >
-                </AddPer>
+                ></AddPer>
                 <EditPer
                     visible={this.state.showEditPerDialog}
                     close={this.closeEditPerDialog}
                     data={this.state.editPer}
                     submitEditPer={this.props.submitEditPer}
-                >
-                </EditPer>
+                />
             </div>
         );
     }
