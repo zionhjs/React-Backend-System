@@ -10,7 +10,7 @@ class AddPer extends Component {
     handleAddPer = () => {
         this.addFrm.validateFields((err, values) => {
             if (err) {
-                message.error('挺近失败！');
+                message.error('Submit Failed!');
                 return;
             }
             let newPer = Object.assign({
@@ -22,12 +22,12 @@ class AddPer extends Component {
             }, values);
             this.props.addPer(newPer)
                 .then(res => {
-                    message.info('添加成功！')
+                    message.info('Add Success!')
                     this.props.close();
                 })
                 .catch(err => {
                     console.log(err);
-                    message.error('添加失败！');
+                    message.error('Add Failed!');
                 })
         })
     }
@@ -38,9 +38,9 @@ class AddPer extends Component {
                 visible={this.props.visible}
                 onCancel={() => this.props.close()}
                 destroyOnClose
-                okText="添加"
-                cancelText="取消"
-                title="添加权限"
+                okText="Add"
+                cancelText="cancel"
+                title="Add_Auth"
                 onOk={this.handleAddPer}
             >
                 <AddPerFrmComponent
