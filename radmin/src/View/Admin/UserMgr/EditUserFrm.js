@@ -1,66 +1,72 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Form, Input, Icon } from 'antd';
 
 class EditUserFrm extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.form.setFieldsValue({
-            name:this.props.data.name,
-            username:this.props.data.name,
-            mail:this.props.data.mail,
-            phone:this.props.data.phone,
-            password:this.props.data.password
+            name: this.props.data.name,
+            username: this.props.data.username,
+            mail: this.props.data.mail,
+            phone: this.props.data.phone,
+            password: this.props.data.password
         });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form layout="horizontal"
+            <Form
+                layout="horizontal"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 20 }}
             >
-                <Form.Item lable="UserName">
+                <Form.Item label="User_Name">
                     {getFieldDecorator('username', {
                         rules: [
                             {
                                 pattern: /\w{6,20}/gi,
-                                message: 'please type-in 6~20 strings!',
-                            }, {
+                                message: 'please type-in 6-20 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your UserName!',
+                                message: 'please type-in UserName',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="user"></Icon>}
-                            placeholder="UserName"
+                            placeholder="User_Name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="PassWord">
+                <Form.Item label="Password">
                     {getFieldDecorator('password', {
                         rules: [
                             {
                                 pattern: /\w{6,20}/gi,
-                                message: 'please type-in 6~20 strings!',
-                            }, {
+                                message: 'please type-in 6-20 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your PassWord!',
+                                message: 'please type-in password!',
                             }
                         ],
                     })(
-                        <Input.Password prefix={<Icon type="safety"></Icon>}
-                            placeholder="PassWord"
+                        <Input.Password prefix={
+                            <Icon type="safety" />
+                        }
+                            placeholder="User_Name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Mail">
+                <Form.Item label="Email">
                     {getFieldDecorator('mail', {
                         rules: [
                             {
                                 type: 'email',
-                                message: 'please type-in right format of Email!'
-                            }, {
+                                message: 'Please type-in correct email-format!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your Email!'
+                                message: 'please type-in Email!',
                             }
                         ],
                     })(
@@ -69,15 +75,16 @@ class EditUserFrm extends Component {
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Name">
+                <Form.Item label="Name">
                     {getFieldDecorator('name', {
                         rules: [
                             {
                                 min: 2,
-                                message: 'please type-in your name!'
-                            }, {
+                                message: 'please type-in more than 2 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your Name!'
+                                message: 'please type-in name!',
                             }
                         ],
                     })(
@@ -86,12 +93,12 @@ class EditUserFrm extends Component {
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Phone">
+                <Form.Item label="Phone">
                     {getFieldDecorator('phone', {
                         rules: [
                             {
                                 pattern: /\d{11}/gi,
-                                message: 'please type-in right format of phone!'
+                                message: 'please type-in 11 strings!',
                             }
                         ],
                     })(
@@ -101,8 +108,8 @@ class EditUserFrm extends Component {
                     )}
                 </Form.Item>
             </Form>
-        );
+        )
     }
 }
 
-export default EditUserFrm;
+export default EditUserFrm

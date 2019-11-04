@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Form, Input, Icon } from 'antd';
 
 class AddRoleFrm extends Component {
-    componentDidMount(){
-        this.props.form.setFieldsValue({'pId':0});
+    componentDidMount() {
+        this.props.form.setFieldsValue({ 'pId': 0 });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -13,59 +13,57 @@ class AddRoleFrm extends Component {
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 20 }}
             >
-                <Form.Item lable="RoleName">
+                <Form.Item label="Role_Name">
                     {getFieldDecorator('name', {
                         rules: [
                             {
-                                min:2,
-                                max:20,
-                                message: 'please type-in 2~20 strings!',
-                            }, {
+                                min: 2,
+                                max: 20,
+                                message: 'please type-in 2-20 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in RoleName!',
+                                message: 'please type-in Role_Name',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="smile"></Icon>}
-                            placeholder="RoleName"
+                            placeholder="Role_Name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Role-Description">
-                    {getFieldDecorator('name', {
+                <Form.Item label="Role_Des">
+                    {getFieldDecorator('des', {
                         rules: [
                             {
-                                min:2,
-                                max:20,
-                                message: 'please type-in 2~20 strings!',
-                            }, {
-                                required: true,
-                                message: 'Please type-in RoleDescription!',
+                                min: 2,
+                                max: 20,
+                                message: 'please type-in 2-20 strings!',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="setting"></Icon>}
-                            placeholder="RoleDescription"
+                            placeholder="Role_Des"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Parent-Role">
+                <Form.Item label="Parent_Role">
                     {getFieldDecorator('pId', {
                         rules: [
                             {
                                 required: true,
-                                message: 'Please type-in ParentRole!',
+                                message: 'please type-in parent-Role',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="user"></Icon>}
-                            placeholder="ParentRole"
+                            placeholder="Parent_Role"
                         />
                     )}
                 </Form.Item>
             </Form>
-        );
+        )
     }
 }
 
-export default AddRoleFrm;
+export default AddRoleFrm

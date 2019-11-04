@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Form, Input, Icon, Upload, Button } from 'antd';
-import { getLoginToken } from '../../../Common/Auth';
+import { getLoginTocken } from '../../../Common/Auth';
 
 class AddUserFrm extends Component {
     handleChangeAvatar = (e) => {
         this.props.changeFileList(e.fileList);
-        if(e.file.response){
+        if (e.file.response) {
             console.log(e.file.response);
             return e.file.response.img;
         }
@@ -14,75 +14,82 @@ class AddUserFrm extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form layout="horizontal"
+            <Form
+                layout="horizontal"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 20 }}
             >
-                <Form.Item lable="UserPhoto">
+                <Form.Item label="UserAvatar">
                     {getFieldDecorator('avatar', {
                         getValueFromEvent: this.handleChangeAvatar,
                         rules: [
                             {
                                 required: true,
-                                message: 'Please update your photo!',
+                                message: 'please update img!',
                             }
                         ],
                     })(
-                        <Upload 
-                               accept="image/*"
-                               action="/per/upload"
-                               headers={{authorization:getLoginToken()}}
-                               name="imgF"
-                               listType="picture"
-                               onChange={this.handleChangeAvatar}
+                        <Upload
+                            accept="image/*"
+                            action="/per/upload"
+                            headers={{ Authorization: getLoginTocken() }}
+                            name="imgF"
+                            listType="picture"
+                            onChange={this.handleChangeAvatar}
+                            fileList={this.props.fileList}
                         >
-                            <Button>UploadPhoto</Button>
+                            <Button>Update_Avatar</Button>
                         </Upload>
                     )}
                 </Form.Item>
-                <Form.Item lable="UserName">
+                <Form.Item label="User_Name">
                     {getFieldDecorator('username', {
                         rules: [
                             {
                                 pattern: /\w{6,20}/gi,
-                                message: 'please type-in 6~20 strings!',
-                            }, {
+                                message: 'please type-in 6-20 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your UserName!',
+                                message: 'please type-in username!',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="user"></Icon>}
-                            placeholder="UserName"
+                            placeholder="User_name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="PassWord">
+                <Form.Item label="Password">
                     {getFieldDecorator('password', {
                         rules: [
                             {
                                 pattern: /\w{6,20}/gi,
-                                message: 'please type-in 6~20 strings!',
-                            }, {
+                                message: 'please type-in 6-20 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your PassWord!',
+                                message: 'please type-in password',
                             }
                         ],
                     })(
-                        <Input.Password prefix={<Icon type="safety"></Icon>}
-                            placeholder="PassWord"
+                        <Input.Password prefix={
+                            <Icon type="safety" />
+                        }
+                            placeholder="User_Name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Mail">
+                <Form.Item label="Email">
                     {getFieldDecorator('mail', {
                         rules: [
                             {
                                 type: 'email',
-                                message: 'please type-in right format of Email!'
-                            }, {
+                                message: 'Please type-in correct format of email!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your Email!'
+                                message: 'please type-in email',
                             }
                         ],
                     })(
@@ -91,15 +98,16 @@ class AddUserFrm extends Component {
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Name">
+                <Form.Item label="Name">
                     {getFieldDecorator('name', {
                         rules: [
                             {
                                 min: 2,
-                                message: 'please type-in your name!'
-                            }, {
+                                message: 'please type-in more than 2 strings!',
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in your Name!'
+                                message: 'please type-in name!',
                             }
                         ],
                     })(
@@ -108,12 +116,12 @@ class AddUserFrm extends Component {
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Phone">
+                <Form.Item label="Phone">
                     {getFieldDecorator('phone', {
                         rules: [
                             {
                                 pattern: /\d{11}/gi,
-                                message: 'please type-in right format of phone!'
+                                message: 'please type-in 11 strings!',
                             }
                         ],
                     })(
@@ -123,8 +131,8 @@ class AddUserFrm extends Component {
                     )}
                 </Form.Item>
             </Form>
-        );
+        )
     }
 }
 
-export default AddUserFrm;
+export default AddUserFrm

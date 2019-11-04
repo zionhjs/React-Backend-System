@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { Breadcrumb, Table, Button, Modal, message, Avatar, Popconfirm, Input } from 'antd';
+import React, { Component } from 'react'
+import { Breadcrumb, Button, Input, Table, message, Modal, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import service from '../../../Service';
 import AddRole from './AddRole';
-import AddUser from '../UserMgr/AddUser';
 import EditRole from './EditRole';
 import SetRolePer from './SetRolePer';
-import {formatDate2String} from '../../../Common/Helper';
+import { formateDate2String } from '../../../Common/Helper';
 
 class RoleMgr extends Component {
     state = {
-        showAddRoleDialog:false,
-        showEditRoleDialog:false,
-        showSetRolePerDialog:false,
+        showAddRoleDialog: false,
+        showEidtRoleDialog: false,
+        showSetRolePerDialog: false,
         selectedRowKeys: [],
         params: {
             _page: 1,
@@ -21,145 +20,140 @@ class RoleMgr extends Component {
             _sort: 'id',
             _order: 'desc'
         },
-        setRolePer:null,
+        setRolePer: null,
         total: 0,
-        roleList: [{
-            "id": 5,
-            "pId": 0,
-            "name": "超级管理员",
-            "des": "超级管理员",
-            "subon": "2019-05-08 16:54:26",
-            "status": 0,
-            "del": 0
-        }],
+        roleList: [],
         columns: [{
-            key: 'Id',
+            key: 'id',
             dataIndex: 'id',
-            title: 'Numbering'
+            title: 'code'
         }, {
-            key: 'Name',
+            key: 'name',
             dataIndex: 'name',
-            title: 'RoleName'
+            title: 'Role_Name'
         }, {
             key: 'status',
             dataIndex: 'status',
-            title: 'Status',
+            title: 'status',
             render: (status, row) => <span>{status === 0 ? 'Enable' : 'Disable'}</span>
         }, {
-            key: 'subbon',
-            dataIndex: 'subbon',
-            title: 'SubmitTime'
+            key: 'subon',
+            dataIndex: 'subon',
+            title: 'Submit-Time'
         }, {
             key: 'pid',
-            dataIndex: 'pid',
-            title: 'ParentRole'
+            dataIndex: 'pId',
+            title: 'Parent_Role'
         }, {
             key: 'del',
             dataIndex: 'del',
-            title: 'modify',
+            title: 'Modify',
             render: (del, row) => {
                 return (
                     <div>
-                        <Button 
-                           type="primary" 
-                           style={{marginRight:'5px'}}
-                           onClick={() => this.handleEdit(row)}
-                        >Edit</Button>
-                        <Popconfirm 
-                           title="sure delete?"
-                           okText="confirm"
-                           cancelText="cancel"
-                           onConfirm={() => {
-                               service.deleteRoles([row.id])
-                               .then(res => {
-                                   message.info('delete success!');
-                                   this.loadData();
-                                   // 重置当前的seletedRowKeys
-                                   this.setState({seletedRowKeys:this.state.selectedRowKeys.filter(item => item !== row.id)})
-                               })
-                               .catch(err => {
-                                   console.log(err);
-                                   message.error('delete failed!');
-                               });
-                           }}
+                        <Button
+                            type="primary"
+                            style={{ marginRight: '5px' }}
+                            onClick={() => this.handleEdit(row)}
+                        >
+                            Edit
+            </Button>
+                        <Popconfirm
+                            title="SureToDelete?"
+                            okText="confirm"
+                            cancelText="cancel"
+                            onConfirm={() => {
+                                service
+                                    .deleteRoles([row.id])
+                                    .then(res => {
+                                        message.info('delete success!');
+                                        this.loadData();
+                                        // 重置当前的selectedRowKeys
+                                        this.setState({ selectedRowKeys: this.state.selectedRowKeys.filter(item => item !== row.id) });
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                        message.error('delete failed!');
+                                    });
+                            }}
                         >
                             <Button type="danger">Delete</Button>
                         </Popconfirm>
                     </div>
-                )
+                );
             }
         }]
     }
-
     handleDelete = () => {
         Modal.confirm({
-            title: 'sure to delete?',
+            title: 'Sure to delete?',
             okText: 'delete',
             cancelText: 'cancel',
             onOk: () => {
-                //拿到要删除的数据的id
-                // this.state.selectedRowKeys
-                service.deleteRoles(this.state.selectedRowKeys)
+                // 拿到要删除的数据的id
+                service
+                    .deleteRoles(this.state.selectedRowKeys)
                     .then(res => {
-                        message.info('delete success!');
+                        message.info('Delete Success!');
                         this.loadData();
-                        this.setState({selectedRowKeys:[]});
+                        this.setState({ selectedRowKeys: [] });
                     })
                     .catch(err => {
                         console.log(err);
-                        message.error('delete failed!');
+                        message.error('Delete Failed!');
                     });
             }
         })
-    }
-    handleEdit = (row) => {
-        this.setState({showEditRoleDialog: true, editRole: row});
+
     }
     handleBarEdit = () => {
-        if(this.state.selectedRowKeys.length !== 1){
-            message.error('please only select 1 row and edit!');
+        if (this.state.selectedRowKeys.length !== 1) {
+            message.error('please only select 1-row to Edit!');
             return;
         }
+
         let editRole = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
-        if(editRole){
-            this.handleEdit(editRole);
-        } 
+        if (editRole) this.handleEdit(editRole);
+    }
+    handleEdit = (row) => {
+        this.setState({ showEidtRoleDialog: true, editRole: row });
+    }
+    saveRole = (role) => {
+        service
+            .saveRole(role)
+            .then(res => {
+                this.closeEditDialog();
+                this.loadData();
+                message.info('Edit Success!');
+            })
+            .catch(err => {
+                console.log(err);
+                message.error('Edit Failed!');
+            })
     }
     handleAdd = () => {
-        this.setState({
-            showAddRoleDialog:true
-        })
+        this.setState({ showAddRoleDialog: true });
     }
     addRole = (role) => {
         let newRole = Object.assign({
-            id:Date.now(),
-            del:0,
-            subon:formatDate2String(new Date()),
-            status:0
-        },role);
-        service.addRole(newRole)
-        .then(res => {
-            message.info('add success!');
-            //关闭当前对话框
-            this.closeAddDialog();
-            this.loadData();
-        })
-        .catch(err => {
-            console.log(err);
-            message.error('add failed!');
-        })
-    }
-    saveRole = (role) => {
-        service.saveRole(role)
-        .then(res => {
-            this.closeEditDialog();
-            this.loadData();
-            message.info('edit success!');
-        })
-        .catch(err => {
-            console.log(err);
-            message.error('edit failed!');
-        })
+            id: Date.now(),
+            del: 0,
+            subon: formateDate2String(new Date()),
+            status: 0
+        }, role);
+        console.log(newRole);
+        service
+            .addRole(newRole)
+            .then(res => {
+                message.info('Add Success!');
+                // 关闭对话框
+                this.closeAddDialog();
+                this.loadData();
+            })
+            .catch(err => {
+                console.log(err);
+                message.error('Add Failed!');
+            })
     }
     handleSearch = (value) => {
         this.setState(preState => {
@@ -170,7 +164,8 @@ class RoleMgr extends Component {
         });
     }
     loadData = () => {
-        service.loadRoleList(this.state.params)
+        service
+            .loadRoleList(this.state.params)
             .then(res => {
                 this.setState({ roleList: res.data, total: parseInt(res.headers['x-total-count']) });
             });
@@ -178,33 +173,32 @@ class RoleMgr extends Component {
     changePage = (page, pageSize) => {
         this.setState(preState => {
             preState.params._page = page;
-            preState.params.limit = pageSize;
+            preState.params._limit = pageSize;
             return { ...preState };
         }, () => {
             this.loadData();
-        });
+        })
     }
 
     closeAddDialog = () => {
-        this.setState({showAddRoleDialog: false});
+        this.setState({ showAddRoleDialog: false });
     }
     closeEditDialog = () => {
-        this.setState({showEditRoleDialog: false});
+        this.setState({ showEidtRoleDialog: false });
     }
     handleSetRolePer = () => {
-        if(this.state.selectedRowKeys.length !== 1){
-            message.error('please only select 1 role to setPermission');
+        if (this.state.selectedRowKeys.length !== 1) {
+            message.error('please only select one-row to edit!');
             return;
         }
-        //roleId => selectedRowKeys[0]
+        // roleId => selectedRowKeys[0]
         let setRole = this.state.roleList.find(item => item.id === this.state.selectedRowKeys[0]);
-        this.setState({showSetRolePerDialog: true, setRolePer:setRole});
+        this.setState({ showSetRolePerDialog: true, setRolePer: setRole });
     }
-    
+
     componentDidMount() {
         this.loadData();
     }
-
     buttonStyle = { margin: '5px' }
 
     render() {
@@ -214,17 +208,17 @@ class RoleMgr extends Component {
             <div>
                 <Breadcrumb>
                     <Breadcrumb.Item>
-                        <Link to="/home">Home</Link>
+                        <Link to="/home">HomePAge</Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <Link to="/home/role_mgr">RoleManegement</Link>
+                        <Link to="/home/role_mgr">Role</Link>
                     </Breadcrumb.Item>
                 </Breadcrumb>
                 <hr />
                 <Button onClick={this.handleAdd} style={this.buttonStyle} type="primary">Add</Button>
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
                 <Button onClick={this.handleBarEdit} style={this.buttonStyle} type="primary">Edit</Button>
-                <Button onClick={this.handleSetRolePer} style={this.buttonStyle} type="danger">SetPermission</Button>
+                <Button onClick={this.handleSetRolePer} style={this.buttonStyle} type="danger">SetAuth</Button>
                 <Input.Search
                     placeholder="search"
                     onSearch={this.handleSearch}
@@ -233,10 +227,10 @@ class RoleMgr extends Component {
                 />
                 <Table
                     bordered
-                    style={{ backgroundColor: '#fefefe' }}
+                    style={{ backgroundColor: '#FEFEFE' }}
                     dataSource={this.state.roleList}
                     columns={this.state.columns}
-                    rowKey="id"   //react要求必须对其指定唯一的key 不然会报错
+                    rowKey="id"
                     rowSelection={{
                         selectedRowKeys: selectedRowKeys,
                         onChange: (selectedRowKeys, selectedRows) => {
@@ -246,38 +240,37 @@ class RoleMgr extends Component {
                     }}
                     pagination={{ total: this.state.total, pageSize: 6, defaultCurrent: 1, onChange: this.changePage }}
                 ></Table>
-                <AddRole 
-                   close={this.closeAddDialog} 
-                   visible={this.state.showAddRoleDialog}
-                   addRole={this.addRole}
-                >
-                </AddRole>
-                <EditRole 
-                   visible={this.state.showEditRoleDialog} 
-                   close={this.closeEditDialog}
-                   data={this.state.editRole}
-                   saveRole={this.saveRole}
+                <AddRole
+                    close={this.closeAddDialog}
+                    visible={this.state.showAddRoleDialog}
+                    addRole={this.addRole}
+                ></AddRole>
+                <EditRole
+                    visible={this.state.showEidtRoleDialog}
+                    close={this.closeEditDialog}
+                    data={this.state.editRole}
+                    saveRole={this.saveRole}
                 />
                 <Modal
-                   visible={this.state.showSetRolePerDialog}
-                   title="setRole Permission"
-                   okText="Confirm"
-                   cancelText="cancel"
-                   onCancel={() => this.setState({showSetRolePerDialog:false})}
-                   onOk={() => {
-                       setRolePerCom.handleSubmitSetRolePer();
-                   }}
+                    visible={this.state.showSetRolePerDialog}
+                    title="SetRoleAuth"
+                    okText="set"
+                    cancelText="cancel"
+                    onCancel={() => this.setState({ showSetRolePerDialog: false })}
+                    onOk={() => {
+                        setRolePerCom.hanldeSubmitSetRolePer();
+                    }}
                 >
                     {
                         this.state.showSetRolePerDialog ?
-                            <SetRolePer close={() => this.setState({showSetRolePerDialog:false})} ref={setRP => setRolePerCom = setRP} data={this.state.setRolePer} /> 
+                            <SetRolePer close={() => this.setState({ showSetRolePerDialog: false })} ref={setRP => setRolePerCom = setRP} data={this.state.setRolePer} />
                             :
                             null
                     }
                 </Modal>
             </div>
-        );
+        )
     }
 }
 
-export default RoleMgr;
+export default RoleMgr

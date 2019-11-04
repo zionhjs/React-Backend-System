@@ -1,49 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Modal, Form, message } from 'antd';
 import EditUserFrm from './EditUserFrm';
 import store from '../../../store';
 import { EditUserActionAsync } from '../../../Action/UserAction';
 
-const EditUserFrmComponent = Form.create({name:'edit_frm'})(EditUserFrm);
+const EditUserFrmComponent = Form.create({ name: 'edit_frm' })(EditUserFrm);
 
 class EditUser extends Component {
     editFrm = null;
-    handleEditUser= () => {
+    handleEditUser = () => {
         this.editFrm.validateFields((err, values) => {
-            // console.log(err);
-            // console.log(values);
-            if(err){
+            if (err) {
                 return;
             }
-            //提交表单
-            //this.props.data
-            let newUser = {...this.props.data, ...values};
-            store.dispatch(EditUserActionAsync(newUser))
-            .then(res => {
-                message.info('edit success!');
-                this.props.close();
-            })
-            .catch((err) => {
-                console.log(err);
-                message.error('edit failed!');
-            })
+            // 提交表单
+            // this.props.data
+            let newUser = { ...this.props.data, ...values };
+            store
+                .dispatch(EditUserActionAsync(newUser))
+                .then(res => {
+                    message.info('Edit Success!');
+                    this.props.close();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    message.error('Edit Failed!');
+                })
         })
     }
     render() {
         return (
             <Modal
-               destoryOnClose
-               title="Edit User"
-               visible={this.props.visible}
-               okText="confirm"
-               cancelText="cancel"
-               onCancel={() => {this.props.close()}}
-               onOk={this.handleEditUser}
+                destroyOnClose
+                title="Edit_User"
+                visible={this.props.visible}
+                okText="Edit"
+                cancelText="cancel"
+                onCancel={() => { this.props.close() }}
+                onOk={this.handleEditUser}
             >
-                <EditUserFrmComponent ref={frm => this.editFrm=frm} data={this.props.data}></EditUserFrmComponent>
+                <EditUserFrmComponent ref={frm => this.editFrm = frm} data={this.props.data}></EditUserFrmComponent>
             </Modal>
-        );
+        )
     }
 }
 
-export default EditUser;
+export default EditUser

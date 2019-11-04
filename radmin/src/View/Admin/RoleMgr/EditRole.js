@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Modal, Form } from 'antd';
-import EditRoleFrm from './EditRoleFrm';
+import EditRoleFrm from './EidtRoleFrm';
 
-const EditRoleFrmComponent = Form.create({name:'frm_edit'})(EditRoleFrm);
+const EditRoleFrmComponent = Form.create({ name: 'frm_edit' })(EditRoleFrm);
 class EditRole extends Component {
     handleEditRole = () => {
         this.editFrm.validateFields((err, value) => {
-            if(err){
-                return;
-            }
+            if (err) return;
             this.props.saveRole(Object.assign({}, this.props.data, value));
         })
     }
@@ -16,21 +14,21 @@ class EditRole extends Component {
     render() {
         return (
             <Modal
-               title="edit role"
-               okText="edit"
-               cancelText="cancel"
-               destroyOnClose
-               visible={this.props.visible}
-               onCancel={this.props.close()}
-               onOk={this.handleEditRole}
+                title="Edit_Role"
+                okText="Edit"
+                cancelText="cancel"
+                destroyOnClose
+                visible={this.props.visible}
+                onCancel={() => this.props.close()}
+                onOk={this.handleEditRole}
             >
-                <EditRoleFrmComponent 
-                   ref={frm => this.editFrm = frm} 
-                   data={this.props.data}
+                <EditRoleFrmComponent
+                    ref={frm => this.editFrm = frm}
+                    data={this.props.data}
                 />
             </Modal>
-        );
+        )
     }
 }
 
-export default EditRole;
+export default EditRole
