@@ -31,7 +31,7 @@ class AddPer extends Component {
                 })
         })
     }
-    addFrm = null;
+    addFrm = null;   //the refs reference for <AddPerFrmComponent />
     render() {
         return (
             <Modal
@@ -44,8 +44,8 @@ class AddPer extends Component {
                 onOk={this.handleAddPer}
             >
                 <AddPerFrmComponent
-                    ref={frm => this.addFrm = frm}
-                />
+                    ref={frm => this.addFrm = frm}   //frm在这里是一个dom元素 并且passed as a parameter. 这里是ref的第二种approach 直接传入一个回调函数 这样做的好处是替代了this.addFrm.current 来调用方法
+                />                                
             </Modal>
         )
     }

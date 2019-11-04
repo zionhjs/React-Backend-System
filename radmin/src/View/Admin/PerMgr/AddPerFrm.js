@@ -6,13 +6,13 @@ class AddPerFrm extends Component {
         this.props.form.setFieldsValue({ pId: 0, type: 'menu', order: 1 });
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form;   //经过 Form.create 包装的组件将会自带 this.props.form 属性 这个包装发生在父组件AddPer.js中
         const { Option } = Select;
         return (
             <Form
                 layout="horizontal"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 20 }}
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
             >
                 <Form.Item label="Auth-Name">
                     {getFieldDecorator('des', {
@@ -89,7 +89,7 @@ class AddPerFrm extends Component {
                 </Form.Item>
                 <Form.Item label="order">
                     {getFieldDecorator('order')(
-                        <Input prefix={<Icon type="mail"></Icon>}
+                        <Input prefix={<Icon type="gold"></Icon>}
                             placeholder="order"
                         />
                     )}
