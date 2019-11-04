@@ -1,99 +1,102 @@
-import React, { Component } from 'react';
-import { Form, Input, Icon, message, Select, Option } from 'antd';
+import React, { Component } from 'react'
+import { Form, Input, Icon, Select } from 'antd'
 
 class AddPerFrm extends Component {
-    componentDidMount(){
-        this.props.form.setFieldsValue({pId:0, type:'menu'})
+    componentDidMount() {
+        this.props.form.setFieldsValue({ pId: 0, type: 'menu', order: 1 });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         const { Option } = Select;
-        
         return (
             <Form
                 layout="horizontal"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 20 }}
             >
-                <Form.Item lable="AuthName">
+                <Form.Item label="Auth-Name">
                     {getFieldDecorator('des', {
                         rules: [
                             {
-                                min:2,
-                                max:20,
+                                min: 2,
+                                max: 20,
                                 message: 'please type-in 2~20 strings!',
-                            }, {
+                            },
+                            {
                                 required: true,
-                                message: 'Please type-in AuthName!',
+                                message: 'please type-in auth name!',
                             }
                         ],
                     })(
                         <Input prefix={<Icon type="smile"></Icon>}
-                            placeholder="AuthName"
+                            placeholder="Auth-Name"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="AuthType">
+                <Form.Item label="Auth-Type">
                     {getFieldDecorator('type', {
                         rules: [
                             {
-                                required:true,
-                                message: 'please choose auth-type!',
-                            }],
+                                required: true,
+                                message: 'Please select Auth-type!',
+                            }
+                        ],
                     })(
-                        <Select defaultValue="router">
-                            <Option value="menu">MenuAuth</Option>
-                            <Option value="action">RequestAuth</Option>
-                            <Option value="router">RouterAuth</Option>
-                            <Option value="resource">ResourceAuth</Option>
-                            <Option value="component">ComponentAuth</Option>
+                        <Select>
+                            <Option value="menu">Menu_Auth</Option>
+                            <Option value="action">Request_Auth</Option>
+                            <Option value="router">Route_Auth</Option>
+                            <Option value="resource">Resource_Auth</Option>
+                            <Option value="component">Component_Auth</Option>
                         </Select>
                     )}
                 </Form.Item>
-                <Form.Item lable="AuthCode">
+                <Form.Item label="Auth-code">
                     {getFieldDecorator('code', {
                         rules: [
                             {
-                                min:2,
-                                max:20,
+                                min: 2,
+                                max: 20,
                                 message: 'please type-in 2~20 strings!',
-                            }],
+                            }
+                        ],
                     })(
                         <Input prefix={<Icon type="setting"></Icon>}
-                            placeholder="AuthCode"
+                            placeholder="Auth-code"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="ParentAuth">
+                <Form.Item label="Parent-Auth">
                     {getFieldDecorator('pId', {
                         rules: [
                             {
                                 required: true,
-                                message: 'Please type-in ParentAuth!',
-                            }],
+                                message: 'please type-in parent-Auth',
+                            }
+                        ],
                     })(
                         <Input prefix={<Icon type="user"></Icon>}
-                            placeholder="Parentauth"
+                            placeholder="Parent-Auth"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Address">
+                <Form.Item label="Address">
                     {getFieldDecorator('url')(
                         <Input prefix={<Icon type="mail"></Icon>}
-                            placeholder="Parentauth"
+                            placeholder="Address"
                         />
                     )}
                 </Form.Item>
-                <Form.Item lable="Order">
+                <Form.Item label="order">
                     {getFieldDecorator('order')(
-                        <Input prefix={<Icon type="email"></Icon>}
-                            placeholder="Order"
+                        <Input prefix={<Icon type="mail"></Icon>}
+                            placeholder="order"
                         />
                     )}
                 </Form.Item>
             </Form>
-        );
+        )
     }
 }
 
-export default AddPerFrm;
+export default AddPerFrm

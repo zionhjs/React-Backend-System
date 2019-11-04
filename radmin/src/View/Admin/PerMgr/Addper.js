@@ -2,33 +2,33 @@ import React, { Component } from 'react'
 import { Modal, Form, message } from 'antd'
 import AddPerFrm from './AddPerFrm';
 import { formateDate2String } from '../../../Common/Helper';
-import { GetLoginUserInfo }  from '../../../Common/Auth';
+import { GetLoginUserInfo } from '../../../Common/Auth';
 
 const AddPerFrmComponent = Form.create({ name: 'add_per' })(AddPerFrm);
 
 class AddPer extends Component {
     handleAddPer = () => {
-        this.addFrm.validateFields((err, value) => {
+        this.addFrm.validateFields((err, values) => {
             if (err) {
-                message.error('add failed!');
+                message.error('挺近失败！');
                 return;
             }
             let newPer = Object.assign({
-                id:Date.now(),
-                del:0,
-                status:0,
-                subon:formatDate2String(new Date()),
-                subby:GetLoginUserInfo().id,
-            }, value);
+                id: Date.now(),
+                del: 0,
+                status: 0,
+                subon: formateDate2String(new Date()),
+                subby: GetLoginUserInfo().id
+            }, values);
             this.props.addPer(newPer)
-            .then(res => {
-                message.info('add success!');
-                this.props.close();
-            })
-            .catch(err => {
-                console.log(err);
-                message.error('add failed!');
-            })
+                .then(res => {
+                    message.info('添加成功！')
+                    this.props.close();
+                })
+                .catch(err => {
+                    console.log(err);
+                    message.error('添加失败！');
+                })
         })
     }
     addFrm = null;
@@ -38,17 +38,17 @@ class AddPer extends Component {
                 visible={this.props.visible}
                 onCancel={() => this.props.close()}
                 destroyOnClose
-                okText="Add"
-                cancelText="cancel"
-                title="Add-Auth"
+                okText="添加"
+                cancelText="取消"
+                title="添加权限"
                 onOk={this.handleAddPer}
             >
                 <AddPerFrmComponent
                     ref={frm => this.addFrm = frm}
                 />
             </Modal>
-        );
+        )
     }
 }
 
-export default AddPer;
+export default AddPer

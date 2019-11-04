@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Modal, Form, message } from 'antd';
+import React, { Component } from 'react'
+import { Modal, Form, message } from 'antd'
 import EditPerFrm from './EditPerFrm';
 
 const EditPerFrmComponent = Form.create({name:'edit_per'})(EditPerFrm);
