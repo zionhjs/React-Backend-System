@@ -9,7 +9,7 @@ export function LoadPer(payload) {
 }
 export function LoadPerAsync(params) {
     return dispatch => {
-        return service.loadPerListt(params)
+        return service.loadPerList(params)
             .then(res => {
                 let payload = { list: res.data, total: parseInt(res.headers['x-total-count']) };
                 dispatch(LoadPer(payload));

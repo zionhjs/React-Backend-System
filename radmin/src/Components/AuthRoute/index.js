@@ -37,7 +37,7 @@ class AuthRoute extends Component {
                     this.state.authorized ?
                         <Route {...this.props} ></Route>
                         :
-                        <Route path={this.props.path} render={() => (<h3>没有权限</h3>)}></Route>
+                        <Route path={this.props.path} render={() => (<h3>Permission denied</h3>)}></Route>
                 }
             </Fragment>
         )
