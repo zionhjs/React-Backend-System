@@ -21,7 +21,6 @@ function App() {
             // 跳转到用户之前要请求的页面。
             return <Redirect to={`/login?preurl=${props.match.path}`}></Redirect>
           }
-          // 权限校验。
           return <Home {...props}></Home>
         }} ></Route>
         <Route path="/about" render={(props) => {
@@ -31,7 +30,6 @@ function App() {
             // 跳转到用户之前要请求的页面。
             return <Redirect to={`/login?preurl=${props.match.path}`}></Redirect>
           }
-          // 权限校验。
           return <About {...props}></About>
         }} ></Route>
         <Route path="/login" component={Login}></Route>

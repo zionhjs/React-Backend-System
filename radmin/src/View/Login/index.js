@@ -20,9 +20,6 @@ class Login extends Component {
             username: '18911112222',
             password: 'aicoder.com',
             code: '22222'
-            // username:'admin1',
-            // paddword:'aicoder.com',
-            // scode:'22222'
         }
     }
     handlerChange = e => {
@@ -32,7 +29,6 @@ class Login extends Component {
     changeCode(e) {
         e.target.src = '/api/code?id=' + Date.now();
     }
-
     handleSubmit = () => {
         let { history, location } = this.props;
         service.userLogin(this.state)
@@ -58,7 +54,7 @@ class Login extends Component {
                 }
             });
     }
-
+    
     render() {
         return (
             <div className="login">
