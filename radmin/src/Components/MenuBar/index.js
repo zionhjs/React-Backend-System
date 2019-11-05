@@ -62,8 +62,6 @@ class MenuBar extends Component {
               )
             })
           }
-          
-          
         </Menu>
       </div>
     )
