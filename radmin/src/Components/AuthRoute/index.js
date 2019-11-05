@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom';
 import { getLoginUserAllPer } from '../../Common/Auth';
+
 class AuthRoute extends Component {
     state = {
         authorized: false

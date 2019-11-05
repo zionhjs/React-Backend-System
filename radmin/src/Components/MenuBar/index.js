@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { Menu, Icon } from 'antd';
 import { getLoginUserAllPer } from '../../Common/Auth';
+
 const { SubMenu } = Menu;
 
 class MenuBar extends Component {
