@@ -54,7 +54,7 @@ class Login extends Component {
                 }
             });
     }
-    
+
     render() {
         return (
             <div className="login">
@@ -114,10 +114,10 @@ class Login extends Component {
                                 </div>
                                 <button className="login-btn-grop">
                                     Login
-                      </button>
+                                </button>
                                 <div className="link-group">
                                     forgot password?
-                      </div>
+                                </div>
                             </ValidatorForm>
                             <div className="login-aside">
                                 <p>Not registered yet?</p>
