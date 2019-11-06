@@ -10,6 +10,7 @@ import axios from 'axios';
 import { getLoginToken } from '../../Common/Auth';
 import AuthRoute from '../../Components/AuthRoute';
 import GoodsMgr from '../GoodsMgr';
+
 const { Header, Footer, Sider, Content } = Layout;
 
 class Home extends Component {

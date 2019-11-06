@@ -22,6 +22,7 @@ class Login extends Component {
             code: '22222'
         }
     }
+
     handlerChange = e => {
         let newState = { [e.target.name]: e.target.value };
         this.setState(state => ({ ...state, ...newState }));

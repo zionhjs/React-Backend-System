@@ -68,7 +68,7 @@ export function getLoginToken(token){
 export function getLoginUserAllPer(){
     //拿到当前登录用户的id
     let userId = GetLoginUserInfo().id;
-    //第一步 先从缓存中获取当前登录用户的所有权限 如果有直接返回
+    //第一步 先从缓存中获取当前登录用户的所有权限 如果有直接返回成Promise对象
     let loginUserPerStr = sessionStorage.getItem('LOGIN_USER_PER');
     if(loginUserPerStr){
         return Promise.resolve(JSON.parse(loginUserPerStr));   //JSON对象转换为Promise对象
