@@ -40,7 +40,7 @@ export default {
     loadRoleList(params) {
         return axios.get('/per/role', { params });
     },
-    // 删除橘色相关方法
+    // 删除角色相关方法
     deleteRoles(ids) {
         return Promise.all(ids.map(id => axios.delete(`/per/role/${id}`)));
     },
