@@ -5,9 +5,11 @@ import store from '../../../store';
 import { AddUserActionAsync } from '../../../Action/UserAction';
 
 const AddUserFrmComponent = Form.create({ name: 'adduser_frm' })(AddUserFrm);
+
 class AddUser extends Component {
     userAddFrm = null;
     state = { fileList: [] }
+
     handleSubmit = () => {
         this.userAddFrm.validateFields((err, data) => {
             // console.log(data);
@@ -40,14 +42,15 @@ class AddUser extends Component {
         this.setState({ fileList: [] });
         this.props.close();
     }
+    
     changeFileList = (fileList) => {
         this.setState({ fileList });
     }
-
+    
     render() {
         return (
             <Modal
-                title="Add User Info"
+                title="Add User Form"
                 okText="confirm"
                 cancelText="cancel"
                 visible={this.props.visible}
