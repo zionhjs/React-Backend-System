@@ -76,7 +76,7 @@ class AddUserFrm extends Component {
                         <Input.Password prefix={
                             <Icon type="safety" />
                         }
-                            placeholder="User_Name"
+                            placeholder="Password"
                         />
                     )}
                 </Form.Item>

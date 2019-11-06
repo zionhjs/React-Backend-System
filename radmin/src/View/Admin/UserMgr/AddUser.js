@@ -11,13 +11,13 @@ class AddUser extends Component {
     state = { fileList: [] }
 
     handleSubmit = () => {
-        this.userAddFrm.validateFields((err, data) => {
+        this.userAddFrm.validateFields((err, data) => {    //data是验证成功之后拿到的数据
             // console.log(data);
             if (err) {
                 return;
             }
             data.del = 0;
-            data.id = Date.now(); // json-server 模拟数据。
+            data.id = Date.now(); // json-server 添加的模拟数据。
             data.isTeacher = false;
             // 给上传的头像添加服务器前缀。
             data.avatar = process.env.REACT_APP_BASEURL + data.avatar;
@@ -43,7 +43,7 @@ class AddUser extends Component {
         this.props.close();
     }
     
-    changeFileList = (fileList) => {   /fileList参数是从子组件传入的
+    changeFileList = (fileList) => {   //fileList参数是从子组件传入的
         this.setState({ fileList });
     }
     
