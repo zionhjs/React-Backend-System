@@ -8,9 +8,9 @@ const EditUserFrmComponent = Form.create({ name: 'edit_frm' })(EditUserFrm);
 
 class EditUser extends Component {
     editFrm = null;   //ref参照对象
-    
+
     handleEditUser = () => {
-        this.editFrm.validateFields((err, values) => {
+        this.editFrm.validateFields((err, values) => {   //values 相当于子表单中的data
             if (err) {
                 return;
             }

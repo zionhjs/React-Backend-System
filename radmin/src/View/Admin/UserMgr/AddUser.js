@@ -7,7 +7,7 @@ import { AddUserActionAsync } from '../../../Action/UserAction';
 const AddUserFrmComponent = Form.create({ name: 'adduser_frm' })(AddUserFrm);
 
 class AddUser extends Component {
-    userAddFrm = null;   //ref对象
+    userAddFrm = null;   //ref参照对象
 
     state = { fileList: [] }
 

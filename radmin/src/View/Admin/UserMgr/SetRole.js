@@ -9,6 +9,7 @@ class SetRole extends Component {
         userRoles: [],      // 当前用户已经管理的所有角色中间表数据
         allCheckedRole: []  // 当前选中的所有的角色。
     }
+
     async componentDidMount() {
         // this.props.data  => 当前设置角色的用户信息
         let userRoles = await service.loadUserRoles(this.props.data.id);
@@ -36,6 +37,7 @@ class SetRole extends Component {
         }
         this.setState({ allCheckedRole: checkedRoleArr });
     }
+
     handleSubmitSetRole = () => {
         // console.log(this.state.allCheckedRole);
         let { allCheckedRole, userRoles } = this.state;
@@ -45,7 +47,7 @@ class SetRole extends Component {
         allCheckedRole.forEach((role, index) => {
             let addRoleIndex = userRoles.findIndex(userRole => userRole.roleId === role.id);
             if (addRoleIndex < 0) {
-                // 添加关联
+                // 添加关联 如果没有找到任何匹配的话
                 let p1 = service.addUserRole({
                     id: Date.now() + index,
                     del: 0,
@@ -76,6 +78,7 @@ class SetRole extends Component {
                 console.log('err :', err);
             });
     }
+
     render() {
         return (
             <Modal
@@ -87,7 +90,7 @@ class SetRole extends Component {
                 visible={this.props.visible}
                 onOk={this.handleSubmitSetRole}
             >
-                <h3>ForUser:{this.props.data ? this.props.data.name : null}  SetRole</h3>
+                <h3>ForUser: {this.props.data ? this.props.data.name : null}  SetRole</h3>
                 <hr />
                 <Row>
                     {
