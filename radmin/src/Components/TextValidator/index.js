@@ -9,7 +9,7 @@ class TextValidator extends ValidatorComponent {
             return null;
         }
         return (
-            <span style={{ color: 'red', textAlign: 'center', width: '150px', fontSize: '12px', position: 'absolute', left: '100%', top: '5px', padding: '0 0 0 15px' }}>
+            <span style={{ color: 'red', textAlign: 'center', width: '150px', fontSize: '12px', position: 'absolute', left: '100%', top: '6px', padding: '0 0 0 15px' }}>
                 {this.getErrorMessage()}
             </span>
         );

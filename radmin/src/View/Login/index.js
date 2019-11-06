@@ -33,7 +33,7 @@ class Login extends Component {
         let { history, location } = this.props;
         service.userLogin(this.state)
             .then(res => {
-                // console.log(res.data);
+                    console.log(res.data);
                 if (res.data.code === 1) {
                     // 保存用户登录信息
                     SaveLoginUserInfo(res.data.user);
