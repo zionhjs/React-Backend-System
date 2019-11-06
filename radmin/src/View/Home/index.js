@@ -42,7 +42,7 @@ class Home extends Component {
             </Switch>
           </Content>
         </Layout>
-        <Footer style={{backgroundColor: 'silver', height: '24px', padding: '0', lineHeight: '24px'}}>Bottom</Footer>
+        <Footer style={{backgroundColor: 'silver', height: '30px', padding: '0', lineHeight: '24px', textAlign:'center'}}>Bottom</Footer>
       </Layout>
     )
   }

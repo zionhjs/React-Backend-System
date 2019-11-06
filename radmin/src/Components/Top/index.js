@@ -28,6 +28,7 @@ class Top extends Component {
                     <a href="/">
                         <h1 style={{ color: '#fff', fontSize: '30px' }}>
                             <Icon type="slack" />
+                            &nbsp;&nbsp;
                             Backend-Mangement-System
                         </h1>
                     </a>
@@ -35,10 +36,12 @@ class Top extends Component {
                 <div className="user-wrap components-top">
                     <div className="btn-group">
                         <Icon type="user" />
+                        &nbsp;
                         <span>{this.state.loginUser && this.state.loginUser.username}</span>
                     </div>
                     <div className="btn-group" onClick={this.hanldeLogout}>
                         <Icon type="logout" />
+                        &nbsp;
                         Logout
                     </div>
                 </div>
