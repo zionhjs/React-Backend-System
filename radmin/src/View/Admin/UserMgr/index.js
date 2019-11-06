@@ -123,7 +123,6 @@ class UserMgr extends Component {
     hideAddUserDialog = () => {
         this.setState({ showAddUserDialog: false });
     }
-
     hideEditUserDialog = () => {
         this.setState({ showEditUserDialog: false });
     }
@@ -163,7 +162,7 @@ class UserMgr extends Component {
 
     handleEdit = () => {
         if (this.state.selectRowKeys.length !== 1) {
-            message.error('please only select one-row to edit!');
+            message.error('please only(OrAtLeast) select one-row to edit!');
             return;
         }
 
@@ -178,7 +177,7 @@ class UserMgr extends Component {
     }
     handleSetRole = () => {
         if (this.state.selectRowKeys.length !== 1) {
-            message.error('please only select one-user to setRole!');
+            message.error('please only(OrAtLeast) select one-user to setRole!');
             return;
         }
         let setRoleUserId = this.state.selectRowKeys[0];

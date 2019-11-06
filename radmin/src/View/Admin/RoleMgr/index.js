@@ -57,7 +57,7 @@ class RoleMgr extends Component {
                             onClick={() => this.handleEdit(row)}
                         >
                             Edit
-            </Button>
+                        </Button>
                         <Popconfirm
                             title="SureToDelete?"
                             okText="confirm"
@@ -84,6 +84,7 @@ class RoleMgr extends Component {
             }
         }]
     }
+
     handleDelete = () => {
         Modal.confirm({
             title: 'Sure to delete?',
