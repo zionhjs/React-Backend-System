@@ -13,7 +13,9 @@ class AddRole extends Component {
             this.props.addRole(values);
         });
     }
+
     frmAddRole = null;
+    
     render() {
         return (
             <Modal
