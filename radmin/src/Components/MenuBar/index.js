@@ -24,12 +24,12 @@ class MenuBar extends Component {
     // 控制路由跳转
     this.setState({current: e.key})
     // this.props.history.push(`/home/${e.key}`);
-    let url = this.state.perMenu.find(item => item.id == e.key).url;
+    let url = this.state.perMenu.find(item => item.id == e.key).url;   //e.key 其实就是<Menu.Item />的key
     this.props.history.push(url);
   }
 
   render () {
-    let rootMenu = this.state.perMenu.filter(m => m.pId == 0);
+    let rootMenu = this.state.perMenu.filter(m => m.pId == 0);   //pId就是父的id
     return (
       <div className="aside-menu-bar">
         <Menu 
@@ -43,7 +43,7 @@ class MenuBar extends Component {
               childMenus.sort((a, b) => a.order -b.order);
               return (
                 <SubMenu
-                  key={rootM.id}
+                  key={rootM.id}   //key实际上就是父的id 这里只有两个父
                   title={
                     <span>
                       <Icon type="pie-chart" />
