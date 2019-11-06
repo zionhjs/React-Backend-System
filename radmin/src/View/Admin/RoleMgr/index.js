@@ -219,7 +219,7 @@ class RoleMgr extends Component {
                 <Button onClick={this.handleAdd} style={this.buttonStyle} type="primary">Add</Button>
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
                 <Button onClick={this.handleBarEdit} style={this.buttonStyle} type="primary">Edit</Button>
-                <Button onClick={this.handleSetRolePer} style={this.buttonStyle} type="danger">SetAuth</Button>
+                <Button onClick={this.handleSetRolePer} style={this.buttonStyle} type="danger">SetPer</Button>
                 <Input.Search
                     placeholder="search"
                     onSearch={this.handleSearch}
