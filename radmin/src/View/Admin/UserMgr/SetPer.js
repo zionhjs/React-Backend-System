@@ -56,6 +56,7 @@ class SetPer extends Component {
         }
         this.setState({ allCheckedPer });
     }
+    
     async componentDidMount() {
         // 加载所有的权限
         let allPer = await service.loadAllPer().then(res => res.data);
