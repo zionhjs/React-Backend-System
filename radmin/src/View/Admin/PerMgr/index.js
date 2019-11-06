@@ -75,7 +75,7 @@ class PerMgr extends Component {
             render: (del, row) => {
                 return (
                     <div>
-                        <Button onClick={() => this.showEditPer(row)} style={{ marginRight: '5px' }} type="primary">编辑</Button>
+                        <Button onClick={() => this.showEditPer(row)} style={{ marginRight: '5px' }} type="primary">Edit</Button>
                         <Popconfirm
                             title="SureToDelete?"
                             okText="Confirm"
@@ -84,7 +84,7 @@ class PerMgr extends Component {
                                 this.deletePerIds([row.id])
                             }}
                         >
-                            <Button type="danger">DELETE</Button>
+                            <Button type="danger">Delete</Button>
                         </Popconfirm>
                     </div>
                 );
