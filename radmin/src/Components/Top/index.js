@@ -6,6 +6,7 @@ import './top.scss';
 
 class Top extends Component {
     state = { loginUser: GetLoginUserInfo() }
+
     hanldeLogout = () => {
         let { history } = this.props;
         Modal.confirm({
@@ -19,6 +20,7 @@ class Top extends Component {
             }
         })
     }
+    
     render() {
         return (
             <Fragment>
@@ -27,7 +29,7 @@ class Top extends Component {
                         <h1 style={{ color: '#fff', fontSize: '30px' }}>
                             <Icon type="slack" />
                             Backend-Mangement-System
-            </h1>
+                        </h1>
                     </a>
                 </div>
                 <div className="user-wrap components-top">
@@ -38,7 +40,7 @@ class Top extends Component {
                     <div className="btn-group" onClick={this.hanldeLogout}>
                         <Icon type="logout" />
                         Logout
-          </div>
+                    </div>
                 </div>
             </Fragment>
         )

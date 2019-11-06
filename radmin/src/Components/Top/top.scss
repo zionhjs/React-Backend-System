@@ -1,9 +1,11 @@
-    .logo-wrap.components_top{
+    .logo-wrap{
         float:left;
+        padding-left:30px;
     }
-    .user-wrap.components_top{
+    .user-wrap{
         float:right;
         font-size:18px;
+        padding-right:30px;
         .btn-group{
             cursor:pointer;
             float:left;
