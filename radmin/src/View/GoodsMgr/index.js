@@ -7,7 +7,7 @@ class GoodsMgr extends Component {
         return (
             <div>
                 <Link to={`${this.props.match.path}/p1`}>Goods-1</Link> |
-        <Link to={`${this.props.match.path}/p2`}>Goods-2</Link>
+                <Link to={`${this.props.match.path}/p2`}>Goods-2</Link>
                 <hr />
                 <Switch>
                     <AuthRoute per={1570974927539} path={`${this.props.match.path}/p1`}
@@ -20,7 +20,6 @@ class GoodsMgr extends Component {
                             return (<h2>p2-online</h2>);
                         }}
                     ></AuthRoute>
-
                 </Switch>
             </div>
         )

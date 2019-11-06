@@ -6,12 +6,13 @@ class AuthRoute extends Component {
     state = {
         authorized: false
     }
+
     componentDidMount() {
         getLoginUserAllPer()
             .then(res => {
-                console.log(res);
-                let authorized = res.findIndex(per => per.id === this.props.per) >= 0
-                this.setState({ authorized });
+                console.log(res);   //res返回的就是LOGIN_USER_PER 里面的所有父子用户数据
+                let authorized = res.findIndex(per => per.id === this.props.per) >= 0   //这里this.props.per其实就是三个Menu数据对应的id
+                this.setState({ authorized });   //true or false
             })
     }
 
