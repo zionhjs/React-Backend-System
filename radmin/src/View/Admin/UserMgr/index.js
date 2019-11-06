@@ -56,7 +56,7 @@ class UserMgr extends Component {
                             style={{ marginRight: '5px' }} type="primary"
                         >
                             Edit
-            </Button>
+                        </Button>
                         <Popconfirm
                             onConfirm={() => {
                                 // message.info(row.id);
@@ -220,7 +220,7 @@ class UserMgr extends Component {
                 <Button onClick={this.handleDelete} style={this.buttonStyle} type="danger">Delete</Button>
                 <Button onClick={this.handleEdit} style={this.buttonStyle} type="primary">Edit</Button>
                 <Button onClick={this.handleSetRole} style={this.buttonStyle} type="danger">SetRole</Button>
-                <Button onClick={this.handleSetPer} style={this.buttonStyle} type="primary">SetAuth</Button>
+                <Button onClick={this.handleSetPer} style={this.buttonStyle} type="primary">SetPer</Button>
                 <Input.Search
                     placeholder="search"
                     onSearch={(value) => {
