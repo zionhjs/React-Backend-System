@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Modal, Form, message } from 'antd';
 import EditUserFrm from './EditUserFrm';
 import store from '../../../store';
@@ -7,7 +7,8 @@ import { EditUserActionAsync } from '../../../Action/UserAction';
 const EditUserFrmComponent = Form.create({ name: 'edit_frm' })(EditUserFrm);
 
 class EditUser extends Component {
-    editFrm = null;
+    editFrm = null;   //ref参照对象
+    
     handleEditUser = () => {
         this.editFrm.validateFields((err, values) => {
             if (err) {
@@ -28,6 +29,7 @@ class EditUser extends Component {
                 })
         })
     }
+    
     render() {
         return (
             <Modal

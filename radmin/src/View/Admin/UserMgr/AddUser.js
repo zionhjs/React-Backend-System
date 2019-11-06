@@ -7,17 +7,18 @@ import { AddUserActionAsync } from '../../../Action/UserAction';
 const AddUserFrmComponent = Form.create({ name: 'adduser_frm' })(AddUserFrm);
 
 class AddUser extends Component {
-    userAddFrm = null;
+    userAddFrm = null;   //ref对象
+
     state = { fileList: [] }
 
     handleSubmit = () => {
-        this.userAddFrm.validateFields((err, data) => {    //data是验证成功之后拿到的数据
+        this.userAddFrm.validateFields((err, data) => {    //data就是表格里现在的数据
             // console.log(data);
             if (err) {
                 return;
             }
             data.del = 0;
-            data.id = Date.now(); // json-server 添加的模拟数据。
+            data.id = Date.now(); // json-server 添加的模拟数据
             data.isTeacher = false;
             // 给上传的头像添加服务器前缀。
             data.avatar = process.env.REACT_APP_BASEURL + data.avatar;
@@ -25,7 +26,7 @@ class AddUser extends Component {
                 .dispatch(AddUserActionAsync(data))
                 .then(res => {
                     message.info('Add Success!');
-                    // 重置添加对话框和关闭对话框。
+                    // 重置添加对话框和关闭对话框
                     this.hanldeCloseModal();
                 })
                 .catch((e) => {
@@ -36,7 +37,7 @@ class AddUser extends Component {
     }
 
     hanldeCloseModal = () => {
-        // 清空所有添加的表单。
+        // 清空所有添加的表单
         this.userAddFrm.resetFields();
         // 清理上传文件
         this.setState({ fileList: [] });

@@ -11,13 +11,14 @@ class EditUserFrm extends Component {
             password: this.props.data.password
         });
     }
+    
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form
                 layout="horizontal"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 20 }}
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
             >
                 <Form.Item label="User_Name">
                     {getFieldDecorator('username', {
