@@ -68,7 +68,7 @@ class UserMgr extends Component {
                         >
                             <Button type="danger" >
                                 Delete
-              </Button>
+                            </Button>
                         </Popconfirm>
                     </div>
                 );
@@ -194,6 +194,7 @@ class UserMgr extends Component {
         let setPerUser = this.state.userlist.find(item => item.id === setPerUserId);
         this.setState({ showSetPerDialog: true, setPerUser: setPerUser });
     }
+
     buttonStyle = { margin: '5px' };
 
     render() {
@@ -201,8 +202,8 @@ class UserMgr extends Component {
         let userRowSelection = {
             selectedRowKeys: selectRowKeys,
             onChange: (selectedRowKeys) => {
-                console.log(selectedRowKeys);
-                this.setState({ selectRowKeys: selectedRowKeys })
+                console.log(selectedRowKeys);   //print row id
+                this.setState({ selectRowKeys: selectedRowKeys })   //selectRowKeys: id
             }
         }
         return (
@@ -234,7 +235,7 @@ class UserMgr extends Component {
                         })
                     }}
                     enterButton
-                    style={{ margin: '5px', width: '300px' }}
+                    style={{ margin: '5px', width: '360px' }}
                 />
                 <Table
                     bordered
