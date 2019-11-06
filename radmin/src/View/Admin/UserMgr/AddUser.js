@@ -43,7 +43,7 @@ class AddUser extends Component {
         this.props.close();
     }
     
-    changeFileList = (fileList) => {
+    changeFileList = (fileList) => {   /fileList参数是从子组件传入的
         this.setState({ fileList });
     }
     
