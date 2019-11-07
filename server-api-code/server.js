@@ -17,7 +17,9 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '_' + file.originalname); // 调整文件的保存地址
   }
 });
+
 const upload = multer({ storage: storage });
+
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 // 所有的api的请求都要求登陆后才能获取到对应的数据
@@ -42,7 +44,7 @@ server.post('/api/userlogin', (req, res) => {
       user: loginUser,
       code: 1,
       msg: 'Authrization Success!',
-      token: 'aicoder.com ' + Date.now()
+      token: 'google.com ' + Date.now()
     });
   } 
   else {
@@ -57,9 +59,9 @@ server.post('/api/userlogin', (req, res) => {
 server.get('/api/code', (req,res)=>{
   const cap = captcha.create({
     color: true,
-    size: 5,
+    size: 6,
     ignoreChars: '0oOi1gjdDl',
-    noise: 1
+    noise: 3
   });
   // req.session.captcha = cap.text; // session 存储
   res.type('svg'); // 响应的类型
