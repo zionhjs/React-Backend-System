@@ -47,7 +47,7 @@ class PerMgr extends Component {
         columns: [{
             key: 'id',
             dataIndex: 'id',
-            title: 'Numbering'
+            title: 'id'
         }, {
             key: 'type',
             dataIndex: 'type',
@@ -91,7 +91,7 @@ class PerMgr extends Component {
             }
         }]
     }
-
+    
     deletePerIds = (ids) => {
         console.log(ids);
         this.props
@@ -108,7 +108,7 @@ class PerMgr extends Component {
                 message.error('Delete Failed! ');
             })
     }
-
+    
     showEditPer = (per) => {
         this.setState({
             showEditPerDialog: true,

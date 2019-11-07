@@ -22,7 +22,7 @@ class AddPer extends Component {
             }, values);
             this.props.addPer(newPer)
                 .then(res => {
-                    message.info('Add Success!')
+                    message.info('Add Success!');
                     this.props.close();
                 })
                 .catch(err => {
