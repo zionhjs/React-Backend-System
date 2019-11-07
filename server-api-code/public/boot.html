@@ -24,7 +24,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <title>bdemo</title>
+    <title>bootstrap-table</title>
   </head>
   <body>
     <div id="toolbar"></div>
@@ -66,15 +66,15 @@
           },
           {
             field: 'id',
-            title: '编号'
+            title: 'Numbering'
           },
           {
             field: 'order',
-            title: '排序',
+            title: 'order',
             editable: {
               mode: 'inline',
               type: 'text',
-              title: '排序'
+              title: 'order'
             },
             formatter: function(value, row, index, field) {
               return '<a class="edit-link" href="javascript:0" data-type="text" data-pk="'+ row.id  +'" data-url="/api/student/carousel">' + value + '</a>';
@@ -82,11 +82,11 @@
           },
           {
             field: 'imgUrl',
-            title: '图片地址',
+            title: 'img-url',
             editable: {
               mode: 'inline',
               type: 'text',
-              title: '图片地址'
+              title: 'img-url'
             },
             formatter: function(value, row, index, field) {
               return '<a class="edit-link" href="javascript:0" data-type="text" data-pk="'+ row.id  +'" data-url="/api/student/carousel">' + value + '</a>';
@@ -94,11 +94,11 @@
           },
           {
             field: 'url',
-            title: '路径',
+            title: 'path',
             editable: {
               mode: 'inline',
               type: 'text',
-              title: '路径'
+              title: 'path'
             },
             formatter: function(value, row, index, field) {
               console.log(2)
@@ -118,7 +118,7 @@
             data: { strJson: JSON.stringify(row) },
             success: function(data, status) {
               if (status == 'success') {
-                alert('编辑成功');
+                alert('EditSuccess!');
               }
             },
             error: function() {
