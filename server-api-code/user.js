@@ -8,7 +8,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -20,7 +20,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: false
@@ -32,7 +32,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -44,7 +44,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -56,7 +56,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -68,7 +68,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -80,7 +80,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -92,7 +92,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -104,7 +104,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -116,7 +116,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -128,7 +128,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -140,7 +140,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -152,7 +152,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true
@@ -164,7 +164,7 @@ module.exports =  [{
   active: true, //  激活
   avatar: 'http://localhost:8888/server/img/a1.png',
   name: Random.cname(),
-  school: '清华大学',
+  school: 'Harvard University',
   mail: Random.email(),
   phone: Random.integer(18911111111, 18999999999),
   isTeacher: true

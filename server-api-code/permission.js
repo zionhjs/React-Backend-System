@@ -95,40 +95,40 @@ let data = Mock.mock({
   role: [{
     id: 5,
     pId: 0,
-    name: '超级管理员',
-    des: '超级管理员',
+    name: 'Super_Manager',
+    des: 'Super_Manager',
     subon: '2019-05-08 16:54:26',
     status: 0,
     del: 0
   },{
     id: 1,
     pId: 0,
-    name: '管理员',
-    des: '管理员',
+    name: 'Manager',
+    des: 'Manager',
     subon: '2019-05-08 16:54:26',
     status: 0,
     del: 0
   },{
     id: 2,
     pId: 0,
-    name: '后台开发员',
-    des: '后台开发员',
+    name: 'Backend-Developer',
+    des: 'Backend-Developer',
     subon: '2019-05-08 16:54:26',
     status: 0,
     del: 0
   },{
     id: 3,
     pId: 0,
-    name: '教师',
-    des: '教师',
+    name: 'Teacher',
+    des: 'Teacher',
     subon: '2019-05-08 16:54:26',
     status: 0,
     del: 0
   },{
     id: 4,
     pId: 0,
-    name: '学生',
-    des: '学生',
+    name: 'Student',
+    des: 'Student',
     subon: '2019-05-08 16:54:26',
     status: 0,
     del: 0
@@ -191,8 +191,8 @@ let data = Mock.mock({
   menu: [{
     id: 1,
     order: 1,
-    title: '学生管理',
-    des: '学生管理',
+    title: 'Student-Management',
+    des: 'Student-Management',
     url: '/student',
     del: 0,
     status: 0,
@@ -201,8 +201,8 @@ let data = Mock.mock({
   }, {
     id: 2,
     order: 2,
-    title: '教师管理',
-    des: '教师管理',
+    title: 'Teacher-Management',
+    des: 'Teacher-Management',
     url: '/teacher',
     del: 0,
     status: 0,
@@ -211,8 +211,8 @@ let data = Mock.mock({
   },{
     id: 3,
     order: 3,
-    title: '学生列表',
-    des: '学生列表',
+    title: 'Student-List',
+    des: 'Student-List',
     url: '/student/list',
     del: 0,
     status: 0,
