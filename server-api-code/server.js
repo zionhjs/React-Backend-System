@@ -1,6 +1,5 @@
 const jsonServer = require('json-server');
 const server = jsonServer.create();
-
 const permissionData = require('./permission');
 const captcha = require('svg-captcha');
 // const perRouter = jsonServer.router(permissionData);
@@ -28,7 +27,7 @@ server.use('/per', (req, res, next) => {
   } else {
     res.status(401).jsonp({
       code: 8,
-      msg: '用户没有登录，不能访问'
+      msg: 'can\'t visit without Login!'
     });
   }
 });
@@ -42,14 +41,14 @@ server.post('/api/userlogin', (req, res) => {
     res.jsonp({
       user: loginUser,
       code: 1,
-      msg: '授权成功',
+      msg: 'Authrization Success!',
       token: 'aicoder.com ' + Date.now()
     });
   } 
   else {
     res.jsonp({
       code: 0,
-      msg: '用户名或者密码错误'
+      msg: 'wrong username or password!'
     });
   }
 });
@@ -73,10 +72,10 @@ server.all('/per/upload', upload.single('imgF'), function(req, res, next) {
   var file = req.file;
   console.log(file);
 
-  console.log('文件类型：%s', file.mimetype);
-  console.log('原始文件名：%s', file.originalname);
-  console.log('文件大小：%s', file.size);
-  console.log('文件保存路径：%s', file.path);
+  console.log('docType:%s', file.mimetype);
+  console.log('OriginalFileName:%s', file.originalname);
+  console.log('FileSize:%s', file.size);
+  console.log('FileSavePath:%s', file.path);
   res.json({ img: `/server/upload/${file.filename}` });
 });
 
