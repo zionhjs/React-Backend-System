@@ -2,7 +2,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const permissionData = require('./permission');
 const captcha = require('svg-captcha');
-// const perRouter = jsonServer.router(permissionData);
+
 const userArr = require('./user');
 const routerUser = jsonServer.router({...{user:userArr}, ...permissionData});
 const multer = require('multer');
