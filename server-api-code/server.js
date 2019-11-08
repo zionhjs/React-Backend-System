@@ -24,7 +24,7 @@ server.use(middlewares);   //use是express注册中间件的方法，它返回�
 server.use(jsonServer.bodyParser);   //use是express注册中间件的方法，它返回一个函数。
 
 // 所有的api的请求都要求登陆后才能获取到对应的数据
-server.use('/per', (req, res, next) => {
+server.use('/per', (req, res, next) => {   //use方法内部可以对访问路径进行判断 据此就能实现简单的路由 根据不同的请求地址 返回不同的网页内容
   if (req.get('Authorization')) {
     next();
   } else {
@@ -36,7 +36,7 @@ server.use('/per', (req, res, next) => {
 });
 
 // 用户登录校验
-server.post('/api/userlogin', (req, res) => {
+server.post('/api/userlogin', (req, res) => {   //all get post put delete等都是use的别名 可以当作是按照use()来使用
   let userName = req.body.username;
   let password = req.body.password;
   let loginUser = userArr.find((item) => item.username == userName && item.password == password);
@@ -84,7 +84,7 @@ server.all('/per/upload', upload.single('imgF'), function(req, res, next) {
 
 // 权限相关接口
 // 获取用户的所有权限
-server.use('/per/getUserPer/:id', (req, res) => {
+server.use('/per/getUserPer/:id', (req, res) => {   //:id是模式匹配的方法 代表可以匹配所有的id
   // 获得当前用户的特殊权限
   let userPerArr = permissionData.user_permission.filter(item => item.userId == req.params.id);
   let userPerIdArr = userPerArr.map(userPer => userPer.permissionId);
