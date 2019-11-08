@@ -112,7 +112,7 @@ server.use('/per/getUserPer/:id', (req, res) => {   //:id是模式匹配的方�
 });
 
 // server.use('/per', perRouter);
-server.use('/per', routerUser);
+server.use('/per', routerUser);   //Express.Router()的用法 => app.user('/', router)
 
 server.listen(8888, () => {
   console.log('API Server is running, http://localhost:8888');
