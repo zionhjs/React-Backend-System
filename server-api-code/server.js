@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '_' + file.originalname); // 调整文件的保存地址
   }
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });   //dest or storage 在哪里存储文件
 
 server.use(middlewares);   //use是express注册中间件的方法，它返回一个函数
 server.use(jsonServer.bodyParser);   //.bodyParser是express非常常用的一个express中间件 用来处理 请求体text.. 编码utf8... 压缩类型gizip...
