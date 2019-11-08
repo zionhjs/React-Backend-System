@@ -19,8 +19,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-server.use(middlewares);   //use是express注册中间件的方法，它返回一个函数。
-server.use(jsonServer.bodyParser);   //use是express注册中间件的方法，它返回一个函数。
+server.use(middlewares);   //use是express注册中间件的方法，它返回一个函数
+server.use(jsonServer.bodyParser);   //.bodyParser是express非常常用的一个express中间件 用来处理 请求体text.. 编码utf8... 压缩类型gizip...
 
 // 所有的api的请求都要求登陆后才能获取到对应的数据
 server.use('/per', (req, res, next) => {   //use方法内部可以对访问路径进行判断 据此就能实现简单的路由 根据不同的请求地址 返回不同的网页内容
@@ -98,7 +98,7 @@ server.use('/per/getUserPer/:id', (req, res) => {   //:id是模式匹配的方�
     }
   });
   
-  let totalPerIdArr =[...new Set([...userPerIdArr, ...rolePerIdArr])];
+  let totalPerIdArr =[...new Set([...userPerIdArr, ...rolePerIdArr])];   //这里获得的是所有角色权限id的数组
   let result = [];
   
   // 把所有权限map包装一下然后放入数组
