@@ -17,7 +17,6 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '_' + file.originalname); // 调整文件的保存地址
   }
 });
-
 const upload = multer({ storage: storage });
 
 server.use(middlewares);   //use是express注册中间件的方法，它返回一个函数。
@@ -102,7 +101,7 @@ server.use('/per/getUserPer/:id', (req, res) => {   //:id是模式匹配的方�
   let totalPerIdArr =[...new Set([...userPerIdArr, ...rolePerIdArr])];
   let result = [];
   
-  // 把所有权限
+  // 把所有权限map包装一下然后放入数组
   permissionData.permission.forEach(per => {
     if(totalPerIdArr.find(perId => per.id == perId && per.del == 0)) {
       result.push(per);
