@@ -22,6 +22,7 @@ const upload = multer({ storage: storage });
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
+
 // 所有的api的请求都要求登陆后才能获取到对应的数据
 server.use('/per', (req, res, next) => {
   if (req.get('Authorization')) {
