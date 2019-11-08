@@ -20,8 +20,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-server.use(middlewares);
-server.use(jsonServer.bodyParser);
+server.use(middlewares);   //use是express注册中间件的方法，它返回一个函数。
+server.use(jsonServer.bodyParser);   //use是express注册中间件的方法，它返回一个函数。
 
 // 所有的api的请求都要求登陆后才能获取到对应的数据
 server.use('/per', (req, res, next) => {
