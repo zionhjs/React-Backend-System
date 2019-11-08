@@ -1,4 +1,5 @@
 const Mock = require('mockjs');
+
 let data = Mock.mock({
   "permission": [
       {
