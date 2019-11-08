@@ -68,6 +68,7 @@ server.get('/api/code', (req,res)=>{
   res.type('svg'); // 响应的类型
   res.send(cap.data);
 });
+
 // 文件上传
 server.all('/per/upload', upload.single('imgF'), function(req, res, next) {
   // req.file is the `avatar` file
